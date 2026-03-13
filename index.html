@@ -1,262 +1,1029 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Sudoeste Meu Amor</title>
-
-<link rel="stylesheet"
-href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
+<title>Sudoeste ↘ Meu Amor</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Barlow+Condensed:wght@700;800;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-
-body{
-font-family:Arial;
-margin:0;
-background:#f5f5f5;
+/* ══════════════════════════════════════════
+   TOKENS — fiel à identidade do post
+══════════════════════════════════════════ */
+:root {
+  --green:      #2DB84B;   /* verde vibrante do post */
+  --green-dark: #1A8A34;   /* sombra/hover */
+  --green-deep: #0E5C22;   /* fundo escuro */
+  --green-pale: #E8F9ED;   /* fundo suave */
+  --white:      #FFFFFF;
+  --off:        #F4FBF6;
+  --text:       #0A2E14;
+  --text-mid:   #2D6B3F;
+  --text-light: #6AAA7A;
+  --black:      #0A0A0A;
+  --shadow:     0 4px 24px rgba(14,92,34,.13);
+  --shadow-lg:  0 16px 56px rgba(14,92,34,.18);
+  --r:          12px;
 }
 
-header{
-background:#0f7b34;
-color:white;
-padding:20px;
-text-align:center;
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'DM Sans',sans-serif;
+  background:var(--off);
+  color:var(--text);
+  overflow-x:hidden;
 }
 
-section{
-padding:20px;
+/* ══════ HEADER ══════ */
+header {
+  background:var(--green);
+  position:sticky; top:0; z-index:200;
+  height:58px; padding:0 20px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo {
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900; font-size:22px;
+  color:var(--white); letter-spacing:-.5px;
+  display:flex; align-items:center; gap:6px;
+  line-height:1;
+}
+.logo-arrow {
+  font-size:18px; font-weight:900;
+  background:var(--white); color:var(--green);
+  width:28px; height:28px; border-radius:6px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Barlow Condensed',sans-serif;
+}
+nav { display:flex; gap:4px; align-items:center; }
+.nb {
+  background:none; border:none; cursor:pointer;
+  font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600;
+  color:rgba(255,255,255,.85); padding:7px 12px; border-radius:8px;
+  transition:.18s; white-space:nowrap;
+}
+.nb:hover, .nb.on { background:rgba(0,0,0,.15); color:var(--white); }
+.nb-cta {
+  background:var(--white) !important; color:var(--green) !important;
+  border-radius:20px; font-weight:700 !important;
+}
+.nb-cta:hover { background:var(--green-pale) !important; }
+
+/* ══════ HERO ══════ */
+.hero {
+  background:var(--green);
+  padding:52px 24px 44px;
+  text-align:center; position:relative; overflow:hidden;
+}
+/* textura sutil */
+.hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background:repeating-linear-gradient(
+    -45deg,
+    transparent,transparent 40px,
+    rgba(255,255,255,.03) 40px,rgba(255,255,255,.03) 80px
+  );
+}
+.hero-seta {
+  display:inline-block;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900; font-size:11px; letter-spacing:2px; text-transform:uppercase;
+  color:rgba(255,255,255,.7); margin-bottom:18px;
+}
+.hero h1 {
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  font-size:clamp(48px,10vw,96px);
+  color:var(--white); line-height:.95;
+  letter-spacing:-1px; text-transform:uppercase;
+  margin-bottom:8px;
+}
+.hero h1 .line2 {
+  font-style:italic; display:block;
+}
+.hero-sub {
+  font-family:'Barlow',sans-serif; font-weight:400;
+  font-size:16px; color:rgba(255,255,255,.7);
+  max-width:440px; margin:14px auto 30px; line-height:1.6;
+}
+.hero-hash {
+  font-family:'Barlow',sans-serif; font-weight:700;
+  font-size:13px; color:rgba(255,255,255,.5);
+  letter-spacing:.5px; margin-bottom:28px;
 }
 
-input,textarea{
+.search-row {
+  display:flex; max-width:480px; margin:0 auto 36px;
+  background:rgba(0,0,0,.18);
+  border:2px solid rgba(255,255,255,.25);
+  border-radius:6px; overflow:hidden;
+}
+.search-row input {
+  flex:1; background:none; border:none; outline:none;
+  color:var(--white); font-family:'DM Sans',sans-serif; font-size:15px;
+  padding:12px 16px;
+}
+.search-row input::placeholder { color:rgba(255,255,255,.4); }
+.search-row button {
+  background:var(--white); border:none; cursor:pointer;
+  color:var(--green); font-weight:800; font-size:13px;
+  padding:12px 22px; font-family:'Barlow Condensed',sans-serif;
+  letter-spacing:.5px; text-transform:uppercase; transition:.18s;
+}
+.search-row button:hover { background:var(--green-pale); }
 
-width:100%;
-padding:10px;
-margin:10px 0;
-border-radius:8px;
-border:1px solid #ccc;
+.hero-nums {
+  display:inline-flex;
+  background:rgba(0,0,0,.2);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:6px; overflow:hidden;
+}
+.hnum {
+  padding:12px 24px; text-align:center;
+  border-right:1px solid rgba(255,255,255,.1);
+}
+.hnum:last-child { border-right:none; }
+.hnum strong {
+  display:block;
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:28px; color:var(--white); line-height:1;
+}
+.hnum span { font-size:10px; color:rgba(255,255,255,.45); text-transform:uppercase; letter-spacing:1px; }
 
+/* ══════ TABS ══════ */
+.tabs {
+  background:var(--white);
+  border-bottom:3px solid var(--green);
+  display:flex; overflow-x:auto; padding:0 20px;
+}
+.tabs::-webkit-scrollbar { display:none; }
+.tab {
+  background:none; border:none; cursor:pointer;
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:15px; letter-spacing:.3px; text-transform:uppercase;
+  color:var(--text-light); padding:14px 16px;
+  border-bottom:3px solid transparent; margin-bottom:-3px;
+  white-space:nowrap; transition:.18s;
+}
+.tab:hover { color:var(--green); }
+.tab.on { color:var(--green); border-color:var(--green); }
+
+.filters {
+  background:var(--green-pale);
+  border-bottom:1px solid #C8EDD3;
+  padding:10px 20px; display:flex; gap:8px; overflow-x:auto; align-items:center;
+}
+.filters::-webkit-scrollbar { display:none; }
+.fbtn {
+  background:var(--white); border:2px solid #B8DFC3;
+  color:var(--text-mid); font-family:'Barlow Condensed',sans-serif;
+  font-weight:700; font-size:13px; letter-spacing:.3px; text-transform:uppercase;
+  padding:6px 14px; border-radius:4px; cursor:pointer; white-space:nowrap; transition:.18s;
+}
+.fbtn:hover, .fbtn.on {
+  background:var(--green); color:var(--white); border-color:var(--green);
 }
 
-button{
+/* ══════ MAIN ══════ */
+main { max-width:1180px; margin:0 auto; padding:36px 20px; }
 
-background:#0f7b34;
-color:white;
-border:none;
-padding:12px;
-border-radius:8px;
-cursor:pointer;
-
+.sec-hd {
+  display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:20px;
+}
+.sec-title {
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900; font-size:32px; text-transform:uppercase; letter-spacing:-.5px;
+}
+.sec-title span { color:var(--green); }
+.see-all {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:14px; text-transform:uppercase; letter-spacing:.5px;
+  color:var(--green); cursor:pointer;
 }
 
-button:hover{
-background:#0c5f29;
+/* ══════ DESTAQUE ══════ */
+.dest-grid {
+  display:grid; grid-template-columns:1.9fr 1fr 1fr; gap:14px; margin-bottom:48px;
+}
+@media(max-width:760px){ .dest-grid{ grid-template-columns:1fr; } }
+
+/* ══════ CARDS ══════ */
+.card {
+  background:var(--white); border-radius:var(--r);
+  overflow:hidden; cursor:pointer;
+  border:2px solid #DCF0E2;
+  transition:transform .25s, box-shadow .25s, border-color .25s;
+  box-shadow:var(--shadow);
+}
+.card:hover {
+  transform:translateY(-5px);
+  box-shadow:var(--shadow-lg);
+  border-color:var(--green);
+}
+.card-cover {
+  background:var(--green);
+  display:flex; align-items:center; justify-content:center;
+  font-size:38px; position:relative;
+}
+.card-cover.tall { height:160px; }
+.card-cover.short { height:110px; }
+.card-logo {
+  position:absolute; bottom:-16px; left:14px;
+  width:38px; height:38px; border-radius:8px;
+  background:var(--white); border:2.5px solid var(--green-pale);
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; box-shadow:var(--shadow);
+}
+.card-body { padding:24px 14px 14px; }
+.card-cat {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--green); margin-bottom:3px;
+}
+.card-name {
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:20px; text-transform:uppercase; line-height:1.05; margin-bottom:4px;
+}
+.card-desc { font-size:12px; color:var(--text-light); line-height:1.45; margin-bottom:10px; }
+.card-addr { font-size:11px; color:var(--text-light); margin-bottom:10px; }
+.card-foot {
+  display:flex; justify-content:space-between; align-items:center;
+  padding-top:8px; border-top:1px solid var(--green-pale);
+}
+.stars { color:#F5C842; font-size:12px; }
+.rtxt { font-size:11px; color:var(--text-light); margin-left:2px; }
+.dbadge {
+  background:var(--green); color:var(--white);
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:14px; letter-spacing:.3px;
+  padding:3px 10px; border-radius:4px;
+}
+.map-sm {
+  background:none; border:2px solid #B8DFC3; color:var(--green-dark);
+  font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:12px;
+  text-transform:uppercase; letter-spacing:.3px;
+  padding:4px 10px; border-radius:4px; cursor:pointer; transition:.18s;
+}
+.map-sm:hover { background:var(--green); color:var(--white); border-color:var(--green); }
+
+/* ══════ GRID ══════ */
+.co-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(265px,1fr));
+  gap:16px; margin-bottom:52px;
 }
 
-#empresas{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-
+/* ══════ SEÇÃO MORADOR ══════ */
+.morador-sec {
+  background:var(--green);
+  border-radius:var(--r); padding:40px 32px;
+  margin-bottom:52px; position:relative; overflow:hidden;
+}
+.morador-sec::before {
+  content:'↘';
+  position:absolute; right:-20px; bottom:-40px;
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:260px; color:rgba(255,255,255,.06); line-height:1;
+  pointer-events:none;
+}
+.ms-tag {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(0,0,0,.15); border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.85); font-family:'Barlow Condensed',sans-serif;
+  font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase;
+  padding:5px 12px; border-radius:4px; margin-bottom:16px;
+}
+.ms-title {
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:clamp(28px,5vw,48px); text-transform:uppercase;
+  color:var(--white); line-height:.95; letter-spacing:-.5px; margin-bottom:12px;
+}
+.ms-title em { font-style:italic; display:block; }
+.ms-sub {
+  font-family:'Barlow',sans-serif; font-size:15px;
+  color:rgba(255,255,255,.65); margin-bottom:24px; line-height:1.6; max-width:500px;
+}
+.ms-perks {
+  display:flex; gap:12px; flex-wrap:wrap; margin-bottom:28px;
+}
+.perk {
+  background:rgba(0,0,0,.15); border:1px solid rgba(255,255,255,.15);
+  border-radius:6px; padding:9px 14px;
+  display:flex; align-items:center; gap:8px;
+  font-family:'Barlow',sans-serif; font-weight:600; font-size:13px;
+  color:rgba(255,255,255,.85);
 }
 
-.card{
-
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
-
+/* FORM MORADOR */
+.ms-form {
+  display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:620px;
 }
-
-#map{
-
-height:400px;
-border-radius:10px;
-
+@media(max-width:560px){ .ms-form{ grid-template-columns:1fr; } }
+.ms-input, .ms-select {
+  background:rgba(255,255,255,.12); border:2px solid rgba(255,255,255,.2);
+  border-radius:6px; padding:11px 14px;
+  color:var(--white); font-family:'DM Sans',sans-serif; font-size:14px;
+  outline:none; transition:.18s; width:100%;
 }
-
-.rating{
-
-font-size:22px;
-color:orange;
-cursor:pointer;
-
+.ms-input::placeholder { color:rgba(255,255,255,.38); }
+.ms-input:focus, .ms-select:focus {
+  border-color:rgba(255,255,255,.6); background:rgba(255,255,255,.18);
 }
+.ms-select option { background:var(--green-deep); color:var(--white); }
+.ms-full { grid-column:1/-1; }
+.ms-btn {
+  grid-column:1/-1;
+  background:var(--white); color:var(--green); border:none;
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:17px; text-transform:uppercase; letter-spacing:.5px;
+  padding:15px; border-radius:6px; cursor:pointer; transition:.18s;
+}
+.ms-btn:hover { background:var(--green-pale); transform:translateY(-1px); }
 
+/* success */
+.success-wrap {
+  display:none; grid-column:1/-1;
+  background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.2);
+  border-radius:10px; padding:24px; color:var(--white);
+  animation:fadeUp .4s ease;
+}
+.success-wrap.show { display:block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)} }
+.sw-icon { font-size:40px; margin-bottom:8px; }
+.sw-title {
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:22px; text-transform:uppercase; margin-bottom:6px;
+}
+.sw-sub { font-size:13px; color:rgba(255,255,255,.6); line-height:1.6; margin-bottom:14px; }
+.email-box {
+  background:rgba(0,0,0,.2); border-radius:8px; padding:16px;
+  border-left:3px solid rgba(255,255,255,.4);
+}
+.eb-from { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:6px; }
+.eb-subj { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:16px; text-transform:uppercase; margin-bottom:8px; }
+.eb-body { font-size:13px; color:rgba(255,255,255,.6); line-height:1.7; }
+
+/* ══════ MODAL ══════ */
+.overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(10,42,20,.8); z-index:300;
+  backdrop-filter:blur(6px);
+  align-items:center; justify-content:center; padding:14px;
+}
+.overlay.open { display:flex; animation:fadeIn .2s ease; }
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.modal {
+  background:var(--white); border-radius:16px;
+  width:100%; max-width:580px; max-height:92vh; overflow-y:auto;
+  box-shadow:0 32px 80px rgba(10,42,20,.35);
+  animation:slideUp .28s ease;
+}
+@keyframes slideUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+.modal-cover {
+  background:var(--green); height:180px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:56px; position:relative;
+}
+.mx {
+  position:absolute; top:12px; right:12px;
+  background:rgba(0,0,0,.3); border:none; color:var(--white);
+  width:34px; height:34px; border-radius:50%;
+  cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center;
+  transition:.18s;
+}
+.mx:hover { background:rgba(0,0,0,.6); }
+.modal-logo {
+  position:absolute; bottom:-20px; left:20px;
+  width:52px; height:52px; border-radius:10px;
+  background:var(--white); border:3px solid var(--green-pale);
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; box-shadow:var(--shadow);
+}
+.mbd { padding:32px 20px 20px; }
+.m-cat {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--green);
+}
+.m-name {
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:28px; text-transform:uppercase; letter-spacing:-.3px;
+  line-height:1; margin:4px 0 10px;
+}
+.m-desc { font-size:14px; color:var(--text-mid); line-height:1.7; margin-bottom:18px; }
+
+.disc-hero {
+  background:var(--green); border-radius:10px; padding:20px;
+  text-align:center; margin-bottom:18px;
+}
+.disc-pct {
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:56px; color:var(--white); line-height:1;
+}
+.disc-lbl { font-size:13px; color:rgba(255,255,255,.7); margin-top:3px; }
+
+.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px; }
+.ibox { background:var(--green-pale); border-radius:8px; padding:12px; }
+.ilbl { font-size:10px; font-weight:600; color:var(--text-light); text-transform:uppercase; letter-spacing:.8px; margin-bottom:3px; }
+.ival { font-size:13px; font-weight:600; color:var(--text); }
+
+.map-modal-btn {
+  width:100%; background:var(--green-pale); border:2px solid #B8DFC3;
+  color:var(--green-dark); font-family:'Barlow Condensed',sans-serif;
+  font-weight:700; font-size:15px; text-transform:uppercase; letter-spacing:.3px;
+  padding:13px; border-radius:8px; cursor:pointer; transition:.18s;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  margin-bottom:20px;
+}
+.map-modal-btn:hover { background:var(--green); color:var(--white); border-color:var(--green); }
+
+/* rating */
+.r-title {
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:18px; text-transform:uppercase; margin-bottom:10px;
+}
+.s-row { display:flex; gap:4px; margin-bottom:10px; }
+.sbtn { font-size:28px; background:none; border:none; cursor:pointer; color:#D8EAD8; transition:.15s; }
+.sbtn.on { color:#F5C842; transform:scale(1.15); }
+.rev-ta {
+  width:100%; border:2px solid #C8EDD3; border-radius:8px;
+  padding:10px 13px; font-family:'DM Sans',sans-serif; font-size:14px;
+  color:var(--text); resize:none; outline:none; background:var(--green-pale); transition:.18s;
+}
+.rev-ta:focus { border-color:var(--green); }
+.rev-send {
+  background:var(--green); color:var(--white); border:none;
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:15px; text-transform:uppercase; letter-spacing:.3px;
+  padding:10px 24px; border-radius:6px; cursor:pointer; margin-top:8px; transition:.18s;
+}
+.rev-send:hover { background:var(--green-dark); }
+.revs { display:flex; flex-direction:column; gap:8px; margin-top:14px; }
+.rev-item { background:var(--green-pale); border-radius:8px; padding:12px; }
+.rev-hd { display:flex; justify-content:space-between; margin-bottom:4px; }
+.rev-name { font-weight:700; font-size:13px; }
+.rev-stars { color:#F5C842; font-size:12px; }
+.rev-txt { font-size:13px; color:var(--text-mid); line-height:1.5; }
+
+/* ══════ MODAL CADASTRO ══════ */
+.add-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+@media(max-width:500px){ .add-form-grid{ grid-template-columns:1fr; } }
+.af-full { grid-column:1/-1; }
+.flbl {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:11px; letter-spacing:1px; text-transform:uppercase;
+  color:var(--text-mid); display:block; margin-bottom:4px;
+}
+.finp, .fsel, .ftex {
+  width:100%; border:2px solid #C8EDD3; border-radius:6px;
+  padding:10px 13px; font-family:'DM Sans',sans-serif; font-size:14px;
+  color:var(--text); outline:none; transition:.18s; background:var(--off);
+}
+.finp:focus,.fsel:focus,.ftex:focus { border-color:var(--green); }
+.ftex { resize:vertical; min-height:76px; }
+.fsub {
+  width:100%; background:var(--green); color:var(--white); border:none;
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:17px; text-transform:uppercase; letter-spacing:.5px;
+  padding:14px; border-radius:8px; cursor:pointer; transition:.18s; margin-top:6px;
+}
+.fsub:hover { background:var(--green-dark); }
+.em-row { display:flex; flex-wrap:wrap; gap:5px; margin-top:4px; }
+.em-opt {
+  width:36px; height:36px; border-radius:6px; border:2px solid #C8EDD3;
+  background:var(--off); cursor:pointer; font-size:17px;
+  display:flex; align-items:center; justify-content:center; transition:.18s;
+}
+.em-opt.sel,.em-opt:hover { border-color:var(--green); background:var(--green-pale); }
+
+/* ══════ TOAST ══════ */
+.toast {
+  position:fixed; bottom:20px; left:50%;
+  transform:translateX(-50%) translateY(70px);
+  background:var(--green-deep); color:var(--white);
+  padding:11px 22px; border-radius:6px; font-size:14px; font-weight:600;
+  box-shadow:var(--shadow-lg); z-index:500; pointer-events:none;
+  transition:transform .28s ease;
+  font-family:'Barlow Condensed',sans-serif; font-size:16px; letter-spacing:.3px;
+  border-left:4px solid var(--green);
+}
+.toast.show { transform:translateX(-50%) translateY(0); }
+
+/* ══════ FOOTER ══════ */
+footer {
+  background:var(--green); padding:40px 24px 28px; text-align:center;
+}
+.foot-logo {
+  font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:32px; text-transform:uppercase; color:var(--white); line-height:1;
+  margin-bottom:4px; letter-spacing:-.5px;
+}
+.foot-hash { font-size:14px; color:rgba(255,255,255,.55); margin-bottom:14px; }
+footer p { font-size:13px; color:rgba(255,255,255,.6); max-width:380px; margin:0 auto 16px; line-height:1.6; }
+.foot-ig {
+  display:inline-block; background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.2);
+  color:var(--white); text-decoration:none; font-family:'Barlow Condensed',sans-serif;
+  font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:.5px;
+  padding:8px 20px; border-radius:4px; transition:.18s;
+}
+.foot-ig:hover { background:rgba(0,0,0,.35); }
+footer small { display:block; margin-top:20px; font-size:11px; color:rgba(255,255,255,.3); }
+
+@media(max-width:600px){
+  .nb:not(.nb-cta):not([data-s]) { display:none; }
+  .info-grid { grid-template-columns:1fr; }
+  .disc-pct { font-size:44px; }
+}
 </style>
-
 </head>
-
 <body>
 
+<!-- HEADER -->
 <header>
-
-<h1>❤️ Sudoeste Meu Amor</h1>
-<p>Descubra empresas do bairro</p>
-
+  <div class="logo">
+    <div class="logo-arrow">↘</div>
+    SUDOESTE MEU AMOR
+  </div>
+  <nav>
+    <button class="nb on" data-s onclick="go('hero')">Início</button>
+    <button class="nb" onclick="go('moradores')">Moradores</button>
+    <button class="nb" onclick="go('empresas')">Empresas</button>
+    <button class="nb nb-cta" onclick="openAdd()">+ Cadastrar Empresa</button>
+  </nav>
 </header>
 
-<section>
-
-<h2>Cadastrar empresa</h2>
-
-<input id="nome" placeholder="Nome da empresa">
-
-<input id="endereco" placeholder="Endereço">
-
-<input id="desconto" placeholder="Desconto (%)">
-
-<textarea id="descricao" placeholder="Descrição"></textarea>
-
-<button onclick="cadastrarEmpresa()">Cadastrar</button>
-
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-seta">↘ Sudoeste · Brasília · DF</div>
+  <h1>
+    SUDOESTE
+    <span class="line2">MEU AMOR</span>
+  </h1>
+  <p class="hero-sub">Comércio local, descontos exclusivos e a comunidade do bairro que a gente ama — num só lugar.</p>
+  <p class="hero-hash">#sudoestemeuamor</p>
+  <div class="search-row">
+    <input type="text" id="searchInp" placeholder="Buscar empresa, categoria…" oninput="doFilter()">
+    <button onclick="doFilter()">Buscar ↘</button>
+  </div>
+  <div class="hero-nums">
+    <div class="hnum"><strong id="stN">12</strong><span>Empresas</span></div>
+    <div class="hnum"><strong id="stD">22%</strong><span>Desconto Médio</span></div>
+    <div class="hnum"><strong id="stR">★4.7</strong><span>Avaliação</span></div>
+    <div class="hnum"><strong id="stM">0</strong><span>Moradores</span></div>
+  </div>
 </section>
 
-<section>
-
-<h2>Empresas</h2>
-
-<div id="empresas"></div>
-
-</section>
-
-<section>
-
-<h2>Mapa do bairro</h2>
-
-<div id="map"></div>
-
-</section>
-
-<script>
-
-let empresas = JSON.parse(localStorage.getItem("empresas")) || []
-
-const map = L.map('map').setView([-15.7975,-47.8977],14)
-
-L.tileLayer(
-'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-).addTo(map)
-
-function salvar(){
-
-localStorage.setItem("empresas",JSON.stringify(empresas))
-
-}
-
-function cadastrarEmpresa(){
-
-let nome=document.getElementById("nome").value
-let endereco=document.getElementById("endereco").value
-let desconto=document.getElementById("desconto").value
-let descricao=document.getElementById("descricao").value
-
-let empresa={
-
-nome,
-endereco,
-desconto,
-descricao,
-avaliacoes:[]
-
-}
-
-empresas.push(empresa)
-
-salvar()
-
-render()
-
-}
-
-function gerarCupom(desconto){
-
-let codigo="SUDOESTE"+Math.floor(Math.random()*10000)
-
-alert(`Cupom gerado!
-
-Código: ${codigo}
-
-Desconto: ${desconto}%`)
-
-}
-
-function avaliar(index,nota){
-
-empresas[index].avaliacoes.push(nota)
-
-salvar()
-
-render()
-
-}
-
-function media(av){
-
-if(av.length==0)return 0
-
-return(
-av.reduce((a,b)=>a+b,0)/av.length
-).toFixed(1)
-
-}
-
-function render(){
-
-let div=document.getElementById("empresas")
-
-div.innerHTML=""
-
-empresas.forEach((e,i)=>{
-
-let card=document.createElement("div")
-
-card.className="card"
-
-card.innerHTML=`
-
-<h3>${e.nome}</h3>
-
-<p>${e.descricao}</p>
-
-<p><b>Desconto:</b> ${e.desconto}%</p>
-
-<p><b>Avaliação:</b> ⭐ ${media(e.avaliacoes)}</p>
-
-<button onclick="gerarCupom(${e.desconto})">
-
-Pegar Cupom
-
-</button>
-
-<div>
-
-<span class="rating" onclick="avaliar(${i},1)">⭐</span>
-<span class="rating" onclick="avaliar(${i},2)">⭐</span>
-<span class="rating" onclick="avaliar(${i},3)">⭐</span>
-<span class="rating" onclick="avaliar(${i},4)">⭐</span>
-<span class="rating" onclick="avaliar(${i},5)">⭐</span>
-
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab on" onclick="setTab('todas',this)">Todas</button>
+  <button class="tab" onclick="setTab('Gastronomia',this)">🍽 Gastronomia</button>
+  <button class="tab" onclick="setTab('Beleza',this)">💅 Beleza</button>
+  <button class="tab" onclick="setTab('Saúde',this)">🏥 Saúde</button>
+  <button class="tab" onclick="setTab('Moda',this)">👗 Moda</button>
+  <button class="tab" onclick="setTab('Serviços',this)">🔧 Serviços</button>
+  <button class="tab" onclick="setTab('Mercado',this)">🛒 Mercado</button>
+  <button class="tab" onclick="setTab('Educação',this)">📚 Educação</button>
+</div>
+<div class="filters">
+  <button class="fbtn on" onclick="setSort(null,this)">Relevância</button>
+  <button class="fbtn" onclick="setSort('desc',this)">↘ Maior Desconto</button>
+  <button class="fbtn" onclick="setSort('rating',this)">★ Melhor Avaliação</button>
+  <button class="fbtn" onclick="setSort('new',this)">Mais Recentes</button>
 </div>
 
-`
+<!-- MAIN -->
+<main>
 
-div.appendChild(card)
+  <!-- DESTAQUE -->
+  <section>
+    <div class="sec-hd">
+      <h2 class="sec-title">EM <span>DESTAQUE</span></h2>
+      <span class="see-all" onclick="go('empresas')">VER TODOS ↘</span>
+    </div>
+    <div class="dest-grid" id="destGrid"></div>
+  </section>
 
-})
+  <!-- CADASTRO MORADOR -->
+  <section class="morador-sec" id="moradores">
+    <div class="ms-tag">🏠 SOU MORADOR DO SUDOESTE</div>
+    <h2 class="ms-title">
+      ACESSE DESCONTOS
+      <em>EXCLUSIVOS ↘</em>
+    </h2>
+    <p class="ms-sub">Cadastre-se gratuitamente e receba sua carteirinha digital com todos os descontos das empresas parceiras. Também te avisamos no seu aniversário com uma surpresa especial! 🎂</p>
+    <div class="ms-perks">
+      <div class="perk">🎟️ Carteirinha digital</div>
+      <div class="perk">📧 E-mail de boas-vindas</div>
+      <div class="perk">🎂 E-mail de aniversário</div>
+      <div class="perk">🔔 Novos descontos toda semana</div>
+    </div>
 
+    <div class="ms-form" id="resForm">
+      <input class="ms-input" id="rNome"  placeholder="Nome completo *" type="text">
+      <input class="ms-input" id="rEmail" placeholder="E-mail *" type="email">
+      <input class="ms-input" id="rPhone" placeholder="WhatsApp (opcional)" type="tel">
+
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <label style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6)">Data de Nascimento *</label>
+        <input class="ms-input" id="rNasc" type="date">
+      </div>
+
+      <select class="ms-select ms-input" id="rBloco">
+        <option value="">Quadra / Bloco…</option>
+        <option>SQSW 100</option><option>SQSW 200</option><option>SQSW 300</option>
+        <option>SQSW 301</option><option>SQSW 302</option><option>SQSW 303</option>
+        <option>SQSW 304</option><option>SQSW 305</option><option>SQSW 306</option>
+        <option>SQSW 307</option><option>SQSW 308</option><option>SQSW 309</option>
+        <option>SQSW 310</option><option>SQSW 311</option><option>SQSW 312</option>
+        <option>EQSW (Entrequadras)</option><option>Outro</option>
+      </select>
+
+      <button class="ms-btn ms-full" onclick="registerResident()">
+        ↘ QUERO MINHA CARTEIRINHA DE DESCONTOS
+      </button>
+
+      <!-- SUCCESS -->
+      <div class="success-wrap" id="successCard">
+        <div class="sw-icon">✅</div>
+        <div class="sw-title">BEM-VINDO AO SUDOESTE MEU AMOR!</div>
+        <p class="sw-sub">Cadastro realizado. Veja abaixo a prévia dos e-mails automáticos que serão enviados:</p>
+
+        <!-- email 1: boas-vindas -->
+        <div class="email-box" style="margin-bottom:10px">
+          <div class="eb-from">📧 ENVIADO AGORA — E-mail de Boas-vindas para: <span id="epEmail1"></span></div>
+          <div class="eb-subj">↘ SUA CARTEIRINHA SUDOESTE MEU AMOR CHEGOU!</div>
+          <div class="eb-body" id="epBody1"></div>
+        </div>
+
+        <!-- email 2: aniversário -->
+        <div class="email-box">
+          <div class="eb-from">🎂 AGENDADO — E-mail de Aniversário (enviado em <span id="epAnivData"></span>)</div>
+          <div class="eb-subj">🎉 FELIZ ANIVERSÁRIO! O SUDOESTE TEM UM PRESENTE PRA VOCÊ</div>
+          <div class="eb-body" id="epBody2"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TODAS AS EMPRESAS -->
+  <section id="empresas">
+    <div class="sec-hd">
+      <h2 class="sec-title">TODAS AS <span>EMPRESAS</span></h2>
+      <span id="coCount" style="font-size:13px;color:var(--text-light);font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase"></span>
+    </div>
+    <div class="co-grid" id="coGrid"></div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">SUDOESTE ↘<br>MEU AMOR</div>
+  <p class="foot-hash">#sudoestemeuamor</p>
+  <p>Conectando moradores e comércio local do bairro mais amado de Brasília.</p>
+  <a class="foot-ig" href="https://instagram.com/sudoestemeuamor" target="_blank">↘ @SUDOESTEMEUAMOR NO INSTAGRAM</a>
+  <small>© 2025 Sudoeste Meu Amor · Sudoeste — Brasília, DF</small>
+</footer>
+
+<!-- MODAL EMPRESA -->
+<div class="overlay" id="coModal" onclick="closeOv(event,'coModal')">
+  <div class="modal">
+    <div class="modal-cover" id="mCover">
+      <button class="mx" onclick="closeById('coModal')">✕</button>
+      <div class="modal-logo" id="mLogo"></div>
+    </div>
+    <div class="mbd">
+      <div class="m-cat" id="mCat"></div>
+      <div class="m-name" id="mName"></div>
+      <div class="m-desc" id="mDesc"></div>
+      <div class="disc-hero">
+        <div class="disc-pct" id="mPct"></div>
+        <div class="disc-lbl">de desconto para moradores cadastrados</div>
+      </div>
+      <div class="info-grid">
+        <div class="ibox"><div class="ilbl">📍 Endereço</div><div class="ival" id="mAddr"></div></div>
+        <div class="ibox"><div class="ilbl">⭐ Avaliação</div><div class="ival" id="mRating"></div></div>
+        <div class="ibox"><div class="ilbl">📞 Contato</div><div class="ival" id="mPhone"></div></div>
+        <div class="ibox"><div class="ilbl">🕐 Horário</div><div class="ival" id="mHours"></div></div>
+      </div>
+      <button class="map-modal-btn" id="mMapBtn">↘ ABRIR NO GOOGLE MAPS</button>
+      <div class="r-title">AVALIE ESTA EMPRESA</div>
+      <div class="s-row" id="sRow">
+        <button class="sbtn" onclick="setR(1)">★</button>
+        <button class="sbtn" onclick="setR(2)">★</button>
+        <button class="sbtn" onclick="setR(3)">★</button>
+        <button class="sbtn" onclick="setR(4)">★</button>
+        <button class="sbtn" onclick="setR(5)">★</button>
+      </div>
+      <textarea class="rev-ta" id="revTa" rows="3" placeholder="Como foi sua experiência?"></textarea>
+      <button class="rev-send" onclick="postRev()">↘ PUBLICAR AVALIAÇÃO</button>
+      <div class="revs" id="revList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ADD EMPRESA -->
+<div class="overlay" id="addModal" onclick="closeOv(event,'addModal')">
+  <div class="modal">
+    <div class="modal-cover" style="background:var(--green)">
+      <button class="mx" onclick="closeById('addModal')">✕</button>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;color:white;text-transform:uppercase;text-align:center;letter-spacing:-.3px;z-index:1;padding:0 20px;line-height:1">
+        CADASTRE SUA<br><em style="font-style:italic">EMPRESA ↘</em>
+      </div>
+    </div>
+    <div class="mbd" style="padding-top:22px">
+      <div class="add-form-grid">
+        <div>
+          <label class="flbl">Nome da Empresa *</label>
+          <input class="finp" id="fNome" placeholder="Ex: Café do Sudoeste">
+        </div>
+        <div>
+          <label class="flbl">Categoria *</label>
+          <select class="fsel" id="fCat">
+            <option value="">Selecione…</option>
+            <option>Gastronomia</option><option>Beleza</option><option>Saúde</option>
+            <option>Moda</option><option>Serviços</option><option>Mercado</option><option>Educação</option>
+          </select>
+        </div>
+        <div class="af-full">
+          <label class="flbl">Descrição *</label>
+          <textarea class="ftex" id="fDesc" placeholder="Descreva sua empresa…"></textarea>
+        </div>
+        <div class="af-full">
+          <label class="flbl">Endereço *</label>
+          <input class="finp" id="fAddr" placeholder="SQSW 304, Bloco A, Loja 10 — Sudoeste">
+        </div>
+        <div>
+          <label class="flbl">Telefone / WhatsApp</label>
+          <input class="finp" id="fPhone" placeholder="(61) 99999-9999">
+        </div>
+        <div>
+          <label class="flbl">E-mail da Empresa</label>
+          <input class="finp" id="fEmail" type="email" placeholder="contato@empresa.com">
+        </div>
+        <div>
+          <label class="flbl">Horário</label>
+          <input class="finp" id="fHours" placeholder="Seg–Sex: 9h–18h">
+        </div>
+        <div>
+          <label class="flbl">Desconto (%) *</label>
+          <input class="finp" id="fDisc" type="number" placeholder="Ex: 15" min="1" max="80">
+        </div>
+
+        <!-- ANIVERSÁRIO COMERCIANTE -->
+        <div>
+          <label class="flbl">📅 Data de Nascimento do Responsável</label>
+          <input class="finp" id="fNasc" type="date">
+        </div>
+        <div>
+          <label class="flbl">👤 Nome do Responsável</label>
+          <input class="finp" id="fResp" placeholder="Nome do dono(a)">
+        </div>
+
+        <div class="af-full">
+          <label class="flbl">Ícone</label>
+          <div class="em-row" id="emRow"></div>
+        </div>
+      </div>
+      <button class="fsub" onclick="addCompany()">↘ CADASTRAR EMPRESA</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══════════════════ DATA ══════════════════ */
+let companies = [
+  {id:1,name:'CANTINA DA VÓ MARIA',cat:'Gastronomia',emoji:'🍝',desc:'Culinária italiana artesanal, massas frescas e molhos de família há 20 anos no coração do Sudoeste.',addr:'SQSW 304, Bloco B, Loja 5 — Sudoeste',phone:'(61) 3345-1234',hours:'Ter–Dom: 11h30–22h',discount:25,rating:4.8,reviews:[{name:'Ana Lima',stars:5,text:'Melhor lasanha de Brasília!'},{name:'Carlos M.',stars:5,text:'Ambiente incrível e comida deliciosa.'}],featured:true},
+  {id:2,name:'STUDIO BELLE',cat:'Beleza',emoji:'💅',desc:'Salão premium de coloração e tratamentos capilares com atendimento personalizado.',addr:'SQSW 302, Bloco C, Loja 3 — Sudoeste',phone:'(61) 99234-5678',hours:'Seg–Sáb: 9h–19h',discount:15,rating:4.7,reviews:[{name:'Fernanda R.',stars:5,text:'Resultado perfeito, super pontual!'}],featured:true},
+  {id:3,name:'FARMÁCIA VIDA & SAÚDE',cat:'Saúde',emoji:'💊',desc:'Farmácia de manipulação com farmacêutico de plantão e dermocosméticos.',addr:'SQSW 306, Bloco A, Loja 1 — Sudoeste',phone:'(61) 3344-9900',hours:'Seg–Sáb: 7h–22h',discount:10,rating:4.6,reviews:[{name:'Paulo S.',stars:4,text:'Ótimo atendimento!'}],featured:true},
+  {id:4,name:'PADARIA SUDOESTE',cat:'Gastronomia',emoji:'🥐',desc:'Pães artesanais, croissants e café da manhã completo todo dia.',addr:'SQSW 308, Bloco D, Loja 8 — Sudoeste',phone:'(61) 3346-0011',hours:'Seg–Dom: 6h–20h',discount:20,rating:4.9,reviews:[{name:'Maria J.',stars:5,text:'Melhor pão de queijo!'}],featured:false},
+  {id:5,name:'ACADEMIA FITSUDOESTE',cat:'Saúde',emoji:'🏋️',desc:'Musculação, aulas coletivas e personal trainer. Planos para todos.',addr:'SQSW 310, Bloco F, Loja 12 — Sudoeste',phone:'(61) 99876-5432',hours:'Seg–Sex: 6h–22h | Sáb: 8h–18h',discount:30,rating:4.5,reviews:[{name:'Lucas P.',stars:5,text:'Equipamentos novos!'}],featured:false},
+  {id:6,name:'BOUTIQUE SUDOESTE STYLE',cat:'Moda',emoji:'👗',desc:'Moda feminina contemporânea com peças exclusivas e curadoria especial.',addr:'SQSW 303, Bloco E, Loja 6 — Sudoeste',phone:'(61) 99345-6789',hours:'Seg–Sáb: 10h–20h',discount:20,rating:4.4,reviews:[{name:'Amanda C.',stars:4,text:'Roupas lindas!'}],featured:false},
+  {id:7,name:'CAFÉ BISTRÔ SUDOESTE',cat:'Gastronomia',emoji:'☕',desc:'Café artesanal, brunchs de fim de semana e espaço coworking com wi-fi.',addr:'SQSW 305, Bloco A, Loja 2 — Sudoeste',phone:'(61) 99456-7890',hours:'Seg–Dom: 7h–21h',discount:12,rating:4.8,reviews:[{name:'Beatriz L.',stars:5,text:'Flat white perfeito!'}],featured:false},
+  {id:8,name:'CLÍNICA BEM ESTAR',cat:'Saúde',emoji:'🌿',desc:'Psicologia, nutrição, fisioterapia e acupuntura. Saúde integral.',addr:'SQSW 307, Bloco B, Loja 7 — Sudoeste',phone:'(61) 3345-3333',hours:'Seg–Sex: 8h–18h',discount:15,rating:4.7,reviews:[{name:'Sofia M.',stars:5,text:'Profissionais excelentes!'}],featured:false},
+  {id:9,name:'MERCADINHO DO BAIRRO',cat:'Mercado',emoji:'🛒',desc:'Hortifrúti fresco, frios e entrega em domicílio no Sudoeste.',addr:'SQSW 309, Bloco C, Loja 4 — Sudoeste',phone:'(61) 3344-2222',hours:'Seg–Dom: 7h–22h',discount:8,rating:4.3,reviews:[{name:'Diego F.',stars:4,text:'Sempre fresquinho!'}],featured:false},
+  {id:10,name:'TECHFIX ASSISTÊNCIA',cat:'Serviços',emoji:'🔧',desc:'Reparo de celulares, notebooks e tablets. Orçamento grátis.',addr:'SQSW 311, Bloco D, Loja 9 — Sudoeste',phone:'(61) 99567-8901',hours:'Seg–Sex: 9h–18h',discount:10,rating:4.6,reviews:[{name:'Marcos V.',stars:5,text:'Resolveu em 2 horas!'}],featured:false},
+  {id:11,name:'ESCOLA WEST IDIOMAS',cat:'Educação',emoji:'📚',desc:'Inglês, Espanhol, Francês e Mandarim com professores nativos certificados.',addr:'SQSW 302, Sala 201 — Sudoeste',phone:'(61) 3344-8800',hours:'Seg–Sex: 7h–21h',discount:35,rating:4.9,reviews:[{name:'Thais O.',stars:5,text:'Aprendi inglês em 18 meses!'}],featured:false},
+  {id:12,name:'PET SHOP SUDOESTE',cat:'Serviços',emoji:'🐾',desc:'Banho, tosa, veterinário e pet shop completo. Amor garantido.',addr:'SQSW 304, Bloco F, Loja 11 — Sudoeste',phone:'(61) 99678-9012',hours:'Seg–Sáb: 8h–19h',discount:18,rating:4.8,reviews:[{name:'Camila R.',stars:5,text:'Minha cachorra ama!'}],featured:false},
+];
+
+let residents = [];
+let curFilter='todas', curSort=null, curCo=null, curR=0, selEmoji='🏪';
+
+/* ══════════════════ RENDER ══════════════════ */
+function renderAll(){
+  renderDest(); renderGrid(companies); updateStats(); buildEmoji();
 }
 
-render()
+function cardHTML(c, tall=false){
+  return `
+  <div class="card" onclick="openCo(${c.id})">
+    <div class="card-cover ${tall?'tall':'short'}">
+      ${c.emoji}
+      <div class="card-logo">${c.emoji}</div>
+    </div>
+    <div class="card-body">
+      <div class="card-cat">${c.cat}</div>
+      <div class="card-name">${c.name}</div>
+      <div class="card-addr">📍 ${c.addr.split('—')[0].trim()}</div>
+      <div class="card-foot">
+        <div>
+          <span class="stars">${'★'.repeat(Math.floor(c.rating||0))}</span>
+          <span class="rtxt">${c.rating||'—'} (${c.reviews.length})</span>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <div class="dbadge">-${c.discount}%</div>
+          <button class="map-sm" onclick="event.stopPropagation();goMaps('${encodeURIComponent(c.addr+', Brasília, DF')}')">↘ MAPA</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
 
+function renderDest(){
+  const f=companies.filter(c=>c.featured).slice(0,3);
+  document.getElementById('destGrid').innerHTML=f.map((c,i)=>cardHTML(c,i===0)).join('');
+}
+
+function renderGrid(list){
+  document.getElementById('coCount').textContent=list.length+' EMPRESA'+(list.length!==1?'S':'');
+  document.getElementById('coGrid').innerHTML = list.length
+    ? list.map(c=>cardHTML(c,false)).join('')
+    : '<div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--text-light);font-family:\'Barlow Condensed\',sans-serif;font-weight:700;font-size:18px">NENHUMA EMPRESA ENCONTRADA</div>';
+}
+
+function updateStats(){
+  document.getElementById('stN').textContent=companies.length;
+  const avg=Math.round(companies.reduce((s,c)=>s+c.discount,0)/companies.length);
+  document.getElementById('stD').textContent=avg+'%';
+  const avgR=(companies.reduce((s,c)=>s+(c.rating||0),0)/companies.filter(c=>c.rating).length).toFixed(1);
+  document.getElementById('stR').textContent='★'+avgR;
+  document.getElementById('stM').textContent=residents.length;
+}
+
+/* ══════════════════ FILTER ══════════════════ */
+function setTab(cat,btn){
+  curFilter=cat; curSort=null;
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); applyFilter();
+}
+function setSort(t,btn){
+  curSort=t;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); applyFilter();
+}
+function doFilter(){ applyFilter(); }
+function applyFilter(){
+  let list=curFilter==='todas'?[...companies]:companies.filter(c=>c.cat===curFilter);
+  const q=document.getElementById('searchInp').value.toLowerCase().trim();
+  if(q) list=list.filter(c=>c.name.toLowerCase().includes(q)||c.cat.toLowerCase().includes(q)||c.desc.toLowerCase().includes(q));
+  if(curSort==='desc') list.sort((a,b)=>b.discount-a.discount);
+  if(curSort==='rating') list.sort((a,b)=>(b.rating||0)-(a.rating||0));
+  if(curSort==='new') list.reverse();
+  renderGrid(list);
+}
+
+/* ══════════════════ CO MODAL ══════════════════ */
+function openCo(id){
+  const c=companies.find(x=>x.id===id); if(!c) return;
+  curCo=id; curR=0;
+  document.getElementById('mCover').style.background='var(--green)';
+  document.getElementById('mLogo').textContent=c.emoji;
+  document.getElementById('mCat').textContent=c.cat;
+  document.getElementById('mName').textContent=c.name;
+  document.getElementById('mDesc').textContent=c.desc;
+  document.getElementById('mPct').textContent=c.discount+'%';
+  document.getElementById('mAddr').textContent=c.addr;
+  document.getElementById('mPhone').textContent=c.phone;
+  document.getElementById('mHours').textContent=c.hours;
+  document.getElementById('mRating').textContent='★'.repeat(Math.floor(c.rating||0))+' '+(c.rating||'—')+' ('+c.reviews.length+')';
+  document.getElementById('mMapBtn').onclick=()=>goMaps(encodeURIComponent(c.addr+', Brasília, DF'));
+  document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('revTa').value='';
+  renderRevs(c);
+  document.getElementById('coModal').classList.add('open');
+}
+function renderRevs(c){
+  document.getElementById('revList').innerHTML=c.reviews.map(r=>`
+    <div class="rev-item">
+      <div class="rev-hd"><span class="rev-name">${r.name}</span><span class="rev-stars">${'★'.repeat(r.stars)}</span></div>
+      <div class="rev-txt">${r.text}</div>
+    </div>
+  `).join('')||'<p style="font-size:13px;color:var(--text-light)">Seja o primeiro a avaliar!</p>';
+}
+function setR(n){
+  curR=n; document.querySelectorAll('.sbtn').forEach((b,i)=>b.classList.toggle('on',i<n));
+}
+function postRev(){
+  const c=companies.find(x=>x.id===curCo); if(!c) return;
+  if(!curR){toast('⭐ SELECIONE UMA NOTA!');return;}
+  const t=document.getElementById('revTa').value.trim();
+  if(!t){toast('ESCREVA UM COMENTÁRIO!');return;}
+  c.reviews.push({name:'Você',stars:curR,text:t});
+  c.rating=Math.round(c.reviews.reduce((s,r)=>s+r.stars,0)/c.reviews.length*10)/10;
+  document.getElementById('mRating').textContent='★'.repeat(Math.floor(c.rating))+' '+c.rating+' ('+c.reviews.length+')';
+  renderRevs(c); document.getElementById('revTa').value=''; curR=0;
+  document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('on'));
+  renderGrid(companies); toast('✅ AVALIAÇÃO PUBLICADA!');
+}
+
+/* ══════════════════ MORADOR ══════════════════ */
+function registerResident(){
+  const nome=document.getElementById('rNome').value.trim();
+  const email=document.getElementById('rEmail').value.trim();
+  const nasc=document.getElementById('rNasc').value;
+  if(!nome||!email){toast('⚠️ NOME E E-MAIL SÃO OBRIGATÓRIOS!');return;}
+  if(!email.includes('@')){toast('E-MAIL INVÁLIDO!');return;}
+  if(!nasc){toast('⚠️ INFORME SUA DATA DE NASCIMENTO!');return;}
+  if(residents.find(r=>r.email===email)){toast('📧 E-MAIL JÁ CADASTRADO!');return;}
+
+  const id='SW-'+String(residents.length+1).padStart(4,'0');
+  const nascDate=new Date(nasc+'T12:00:00');
+  const nascFmt=nascDate.toLocaleDateString('pt-BR');
+  // próximo aniversário
+  const hoje=new Date(); let aniv=new Date(hoje.getFullYear(),nascDate.getMonth(),nascDate.getDate());
+  if(aniv<=hoje) aniv.setFullYear(hoje.getFullYear()+1);
+  const anivFmt=aniv.toLocaleDateString('pt-BR');
+
+  residents.push({nome,email,nasc,bloco:document.getElementById('rBloco').value,id});
+  updateStats();
+
+  // top descontos
+  const top=companies.sort((a,b)=>b.discount-a.discount).slice(0,4)
+    .map(c=>`• ${c.name}: <strong>-${c.discount}%</strong>`).join('<br>');
+
+  document.getElementById('epEmail1').textContent=email;
+  document.getElementById('epBody1').innerHTML=`
+    Olá, <strong>${nome}</strong>! 🌿<br><br>
+    Seja bem-vindo(a) ao <strong>Sudoeste Meu Amor</strong>!<br>
+    Sua carteirinha de membro foi criada.<br><br>
+    🎟️ <strong>ID:</strong> ${id} &nbsp;|&nbsp; 🏠 <strong>Quadra:</strong> ${document.getElementById('rBloco').value||'Sudoeste'}<br><br>
+    <strong>Seus melhores descontos agora:</strong><br>${top}<br><br>
+    Mostre este e-mail nas empresas parceiras. 💚<br>
+    <em style="opacity:.6">use #sudoestemeuamor</em>
+  `;
+  document.getElementById('epAnivData').textContent=anivFmt;
+  document.getElementById('epBody2').innerHTML=`
+    🎉 Feliz aniversário, <strong>${nome}</strong>!<br><br>
+    O Sudoeste Meu Amor tem um presente especial pra você:<br><br>
+    🎁 <strong>CUPOM ANIVERSARIANTE: ANIV${id}</strong><br>
+    Válido por 24h em todas as empresas parceiras.<br><br>
+    Aproveite seu dia! O bairro te ama. 💚<br>
+    <em style="opacity:.6">#sudoestemeuamor</em>
+  `;
+
+  document.getElementById('successCard').classList.add('show');
+  ['rNome','rEmail','rPhone','rNasc'].forEach(i=>document.getElementById(i).value='');
+  document.getElementById('rBloco').value='';
+  toast('🎉 CADASTRO REALIZADO! CONFIRA OS E-MAILS ABAIXO ↘');
+}
+
+/* ══════════════════ ADD EMPRESA ══════════════════ */
+function openAdd(){ document.getElementById('addModal').classList.add('open'); }
+function addCompany(){
+  const nome=document.getElementById('fNome').value.trim();
+  const cat=document.getElementById('fCat').value;
+  const desc=document.getElementById('fDesc').value.trim();
+  const addr=document.getElementById('fAddr').value.trim();
+  const disc=parseInt(document.getElementById('fDisc').value)||0;
+  if(!nome||!cat||!desc||!addr||!disc){toast('⚠️ PREENCHA OS CAMPOS OBRIGATÓRIOS!');return;}
+  companies.unshift({
+    id:Date.now(), name:nome.toUpperCase(), cat, emoji:selEmoji, desc, addr,
+    phone:document.getElementById('fPhone').value||'(61) 99999-9999',
+    hours:document.getElementById('fHours').value||'Consulte o estabelecimento',
+    discount:disc, rating:0, reviews:[], featured:false,
+    resp:document.getElementById('fResp').value, nasc:document.getElementById('fNasc').value
+  });
+  renderAll(); closeById('addModal');
+  ['fNome','fDesc','fAddr','fPhone','fEmail','fHours','fDisc','fResp','fNasc'].forEach(i=>document.getElementById(i).value='');
+  document.getElementById('fCat').value='';
+  toast('🌿 EMPRESA CADASTRADA COM SUCESSO! ↘');
+}
+
+/* ══════════════════ EMOJI ══════════════════ */
+function buildEmoji(){
+  const e='🍕🍔☕🥗🍣🍰🥐🍹💅💆🧴👗👠🏋️💊🧸📚🛒🔧🏠🚗🎨🌺🐾🍝🏪💇🥦🏥🌿'.split('').filter(Boolean);
+  document.getElementById('emRow').innerHTML=e.map(em=>`
+    <div class="em-opt ${em===selEmoji?'sel':''}" onclick="selEm('${em}')">${em}</div>
+  `).join('');
+}
+function selEm(e){ selEmoji=e; document.querySelectorAll('.em-opt').forEach(el=>el.classList.toggle('sel',el.textContent===e)); }
+
+/* ══════════════════ UTILS ══════════════════ */
+function goMaps(q){ window.open('https://www.google.com/maps/search/?api=1&query='+q,'_blank'); }
+function closeOv(e,id){ if(e.target.id===id) closeById(id); }
+function closeById(id){ document.getElementById(id).classList.remove('open'); }
+function go(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+renderAll();
 </script>
-
 </body>
-
 </html>
