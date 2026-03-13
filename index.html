@@ -8,14 +8,88 @@
 
 <title>Sudoeste Meu Amor</title>
 
-<link rel="stylesheet" href="style.css">
-
-<link rel="manifest" href="manifest.json">
-
 <link rel="stylesheet"
 href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f5f5f5;
+}
+
+header{
+background:#0f7b34;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+section{
+padding:20px;
+}
+
+input,textarea{
+
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:8px;
+border:1px solid #ccc;
+
+}
+
+button{
+
+background:#0f7b34;
+color:white;
+border:none;
+padding:12px;
+border-radius:8px;
+cursor:pointer;
+
+}
+
+button:hover{
+background:#0c5f29;
+}
+
+#empresas{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+
+}
+
+.card{
+
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+
+}
+
+#map{
+
+height:400px;
+border-radius:10px;
+
+}
+
+.rating{
+
+font-size:22px;
+color:orange;
+cursor:pointer;
+
+}
+
+</style>
 
 </head>
 
@@ -28,7 +102,7 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 </header>
 
-<section class="cadastro">
+<section>
 
 <h2>Cadastrar empresa</h2>
 
@@ -60,7 +134,128 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 </section>
 
-<script src="app.js"></script>
+<script>
+
+let empresas = JSON.parse(localStorage.getItem("empresas")) || []
+
+const map = L.map('map').setView([-15.7975,-47.8977],14)
+
+L.tileLayer(
+'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+).addTo(map)
+
+function salvar(){
+
+localStorage.setItem("empresas",JSON.stringify(empresas))
+
+}
+
+function cadastrarEmpresa(){
+
+let nome=document.getElementById("nome").value
+let endereco=document.getElementById("endereco").value
+let desconto=document.getElementById("desconto").value
+let descricao=document.getElementById("descricao").value
+
+let empresa={
+
+nome,
+endereco,
+desconto,
+descricao,
+avaliacoes:[]
+
+}
+
+empresas.push(empresa)
+
+salvar()
+
+render()
+
+}
+
+function gerarCupom(desconto){
+
+let codigo="SUDOESTE"+Math.floor(Math.random()*10000)
+
+alert(`Cupom gerado!
+
+Código: ${codigo}
+
+Desconto: ${desconto}%`)
+
+}
+
+function avaliar(index,nota){
+
+empresas[index].avaliacoes.push(nota)
+
+salvar()
+
+render()
+
+}
+
+function media(av){
+
+if(av.length==0)return 0
+
+return(
+av.reduce((a,b)=>a+b,0)/av.length
+).toFixed(1)
+
+}
+
+function render(){
+
+let div=document.getElementById("empresas")
+
+div.innerHTML=""
+
+empresas.forEach((e,i)=>{
+
+let card=document.createElement("div")
+
+card.className="card"
+
+card.innerHTML=`
+
+<h3>${e.nome}</h3>
+
+<p>${e.descricao}</p>
+
+<p><b>Desconto:</b> ${e.desconto}%</p>
+
+<p><b>Avaliação:</b> ⭐ ${media(e.avaliacoes)}</p>
+
+<button onclick="gerarCupom(${e.desconto})">
+
+Pegar Cupom
+
+</button>
+
+<div>
+
+<span class="rating" onclick="avaliar(${i},1)">⭐</span>
+<span class="rating" onclick="avaliar(${i},2)">⭐</span>
+<span class="rating" onclick="avaliar(${i},3)">⭐</span>
+<span class="rating" onclick="avaliar(${i},4)">⭐</span>
+<span class="rating" onclick="avaliar(${i},5)">⭐</span>
+
+</div>
+
+`
+
+div.appendChild(card)
+
+})
+
+}
+
+render()
+
+</script>
 
 </body>
 
