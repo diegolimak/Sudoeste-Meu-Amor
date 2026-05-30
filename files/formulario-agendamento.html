@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agende sua Promoção - Sudoeste Meu Amor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #2DB84B 0%, #1a7a2e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 2px solid #2DB84B;
+            padding-bottom: 12px;
+        }
+
+        /* SEÇÃO 1: SELEÇÃO DE PLANO */
+        .planos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .plano-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .plano-card:hover {
+            border-color: #2DB84B;
+            box-shadow: 0 4px 12px rgba(45, 184, 75, 0.1);
+        }
+
+        .plano-card.selecionado {
+            border-color: #2DB84B;
+            background: #f0f9f5;
+        }
+
+        .plano-card input[type="radio"] {
+            display: none;
+        }
+
+        .plano-card .nome {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .plano-card .descricao {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .plano-card .preco {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2DB84B;
+            margin-bottom: 8px;
+        }
+
+        .plano-card .beneficios {
+            font-size: 12px;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        /* SEÇÃO 2: DADOS BÁSICOS */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #2DB84B;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
+
+        /* SEÇÃO 3: UPLOAD DE IMAGEM */
+        .file-upload {
+            position: relative;
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            border: 2px dashed #2DB84B;
+            border-radius: 8px;
+            background: #f0f9f5;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-label:hover {
+            background: #e8f7f1;
+        }
+
+        .file-label.has-file {
+            background: #e8f7f1;
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+            color: #2DB84B;
+        }
+
+        .file-text h3 {
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .file-text p {
+            color: #999;
+            font-size: 12px;
+        }
+
+        .image-preview {
+            margin-top: 12px;
+            border-radius: 8px;
+            overflow: hidden;
+            max-height: 200px;
+        }
+
+        .image-preview img {
+            width: 100%;
+            display: block;
+        }
+
+        /* SEÇÃO 4: CALENDÁRIO */
+        .calendario-section {
+            display: none;
+        }
+
+        .calendario-section.ativo {
+            display: block;
+        }
+
+        .mes-navegacao {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .mes-navegacao button {
+            background: #2DB84B;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .mes-navegacao button:hover {
+            background: #1a7a2e;
+        }
+
+        .mes-titulo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .calendario {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .dia-header {
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+            padding: 10px;
+            font-size: 12px;
+        }
+
+        .dia {
+            aspect-ratio: 1;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .dia.outro-mes {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .dia.disponivel:hover {
+            border-color: #2DB84B;
+            background: #f0f9f5;
+        }
+
+        .dia.selecionado {
+            background: #2DB84B;
+            color: white;
+            border-color: #2DB84B;
+        }
+
+        .dia.lotado {
+            background: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+            border-color: #ddd;
+        }
+
+        .dia-numero {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .dia-slots {
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        /* SEÇÃO 5: SELEÇÃO DE HORÁRIOS */
+        .horarios-section {
+            display: none;
+        }
+
+        .horarios-section.ativo {
+            display: block;
+        }
+
+        .horarios-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .horario-btn {
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .horario-btn:hover:not(:disabled) {
+            border-color: #2DB84B;
+            background: #f0f9f5;
+        }
+
+        .horario-btn.selecionado {
+            background: #2DB84B;
+            color: white;
+            border-color: #2DB84B;
+        }
+
+        .horario-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f5f5f5;
+        }
+
+        /* RESUMO */
+        .resumo {
+            background: #f0f9f5;
+            border: 2px solid #2DB84B;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .resumo h3 {
+            color: #2DB84B;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .resumo-item {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .resumo-item strong {
+            color: #333;
+        }
+
+        /* BOTÃO SUBMIT */
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #2DB84B 0%, #1a7a2e 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(45, 184, 75, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* MENSAGENS */
+        .message {
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .message.success {
+            background: #e8f7f1;
+            color: #1a7a2e;
+            border: 1px solid #2DB84B;
+        }
+
+        .message.error {
+            background: #fdeaea;
+            color: #c53030;
+            border: 1px solid #fc8181;
+        }
+
+        .message.loading {
+            background: #e6f2ff;
+            color: #2563b0;
+            border: 1px solid #2563b0;
+        }
+
+        /* STEPS */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: 0;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-weight: 600;
+            color: #999;
+            transition: all 0.3s;
+        }
+
+        .step.ativo .step-circle {
+            background: #2DB84B;
+            color: white;
+            border-color: #2DB84B;
+        }
+
+        .step.completo .step-circle {
+            background: #2DB84B;
+            color: white;
+            border-color: #2DB84B;
+        }
+
+        .step-label {
+            font-size: 12px;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .planos-container {
+                grid-template-columns: 1fr;
+            }
+
+            .horarios-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌳 Sudoeste Meu Amor</h1>
+            <p>Agende sua promoção nos melhores horários</p>
+        </div>
+
+        <!-- STEPS -->
+        <div class="steps">
+            <div class="step ativo completo">
+                <div class="step-circle">1</div>
+                <div class="step-label">Plano</div>
+            </div>
+            <div class="step ativo">
+                <div class="step-circle">2</div>
+                <div class="step-label">Dados</div>
+            </div>
+            <div class="step">
+                <div class="step-circle">3</div>
+                <div class="step-label">Calendário</div>
+            </div>
+            <div class="step">
+                <div class="step-circle">4</div>
+                <div class="step-label">Horário</div>
+            </div>
+            <div class="step">
+                <div class="step-circle">5</div>
+                <div class="step-label">Confirmar</div>
+            </div>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <form id="agendamentoForm">
+            <!-- STEP 1: PLANO -->
+            <div class="card">
+                <h2>📦 Escolha seu Plano</h2>
+                <div class="planos-container">
+                    <label class="plano-card">
+                        <input type="radio" name="plano" value="diario" required>
+                        <div class="nome">☀️ Diário</div>
+                        <div class="preco">R$ 29,90</div>
+                        <div class="descricao">1 dia</div>
+                        <div class="beneficios">• Sai 1x naquele dia<br>• Você escolhe o horário<br>• Máx. 4 por dia</div>
+                    </label>
+
+                    <label class="plano-card">
+                        <input type="radio" name="plano" value="semanal" required>
+                        <div class="nome">📅 Semanal</div>
+                        <div class="preco">R$ 79,90</div>
+                        <div class="descricao">3 semanas</div>
+                        <div class="beneficios">• 1x por semana<br>• Mesmo dia e horário<br>• Total 3 vezes</div>
+                    </label>
+
+                    <label class="plano-card">
+                        <input type="radio" name="plano" value="mensal" required>
+                        <div class="nome">📆 Mensal</div>
+                        <div class="preco">R$ 199,90</div>
+                        <div class="descricao">4 semanas</div>
+                        <div class="beneficios">• 1x por semana<br>• Mesmo dia e horário<br>• Total 4 vezes</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- STEP 2: DADOS -->
+            <div class="card">
+                <h2>📝 Seus Dados</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="instagram">👤 Instagram do Negócio *</label>
+                        <input 
+                            type="text" 
+                            id="instagram" 
+                            name="instagram" 
+                            placeholder="@seu_negocio"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nomeNegocio">🏪 Nome do Negócio *</label>
+                        <input 
+                            type="text" 
+                            id="nomeNegocio" 
+                            name="nomeNegocio" 
+                            placeholder="Ex: Padaria do João"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="promocao">✨ Descrição da Promoção *</label>
+                    <textarea 
+                        id="promocao" 
+                        name="promocao" 
+                        placeholder="Ex: Pão francês com 10% de desconto. Válido até domingo! Mostre o story do Sudoeste Meu Amor."
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>🎨 Arte da Promoção (será postada) *</label>
+                    <div class="file-upload">
+                        <input 
+                            type="file" 
+                            id="arte" 
+                            name="arte"
+                            accept="image/*"
+                            required
+                        >
+                        <label for="arte" class="file-label" id="fileLabelArte">
+                            <svg class="file-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <div class="file-text">
+                                <h3>Clique ou arraste sua arte</h3>
+                                <p>PNG, JPG ou GIF (máx. 5MB) - Será postada no grupo</p>
+                            </div>
+                        </label>
+                        <div id="imagePreviewArte" class="image-preview" style="display: none;">
+                            <img id="previewImgArte" alt="Preview Arte">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>📋 Comprovante de Pagamento *</label>
+                    <div class="file-upload">
+                        <input 
+                            type="file" 
+                            id="comprovante" 
+                            name="comprovante"
+                            accept="image/*"
+                            required
+                        >
+                        <label for="comprovante" class="file-label" id="fileLabelComprovante">
+                            <svg class="file-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <div class="file-text">
+                                <h3>Clique ou arraste o comprovante</h3>
+                                <p>PNG, JPG ou GIF (máx. 5MB) - Será verificado por nós</p>
+                            </div>
+                        </label>
+                        <div id="imagePreviewComprovante" class="image-preview" style="display: none;">
+                            <img id="previewImgComprovante" alt="Preview Comprovante">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: CALENDÁRIO -->
+            <div class="card calendario-section" id="calendarioSection">
+                <h2>📅 Escolha a Data</h2>
+                <div class="mes-navegacao">
+                    <button type="button" id="mesAnterior">← Anterior</button>
+                    <div class="mes-titulo" id="mesTitulo"></div>
+                    <button type="button" id="mesProximo">Próximo →</button>
+                </div>
+                <div id="calendario" class="calendario"></div>
+                <p id="diasInfo" style="font-size: 12px; color: #999; text-align: center;"></p>
+            </div>
+
+            <!-- STEP 4: HORÁRIOS -->
+            <div class="card horarios-section" id="horariosSection">
+                <h2>🕐 Escolha o Horário</h2>
+                <div class="horarios-grid" id="horariosGrid"></div>
+            </div>
+
+            <!-- RESUMO -->
+            <div class="card">
+                <div class="resumo">
+                    <h3>📋 Seu Agendamento</h3>
+                    <div class="resumo-item">
+                        <strong>Plano:</strong>
+                        <span id="resumoPlano">-</span>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Negócio:</strong>
+                        <span id="resumoNegocio">-</span>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Data(s):</strong>
+                        <span id="resumoDatas">-</span>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Horário(s):</strong>
+                        <span id="resumoHorarios">-</span>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Valor Total:</strong>
+                        <span id="resumoValor">-</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    ✓ Enviar Agendamento
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // ==========================================
+        // CONFIGURAÇÃO INICIAL
+        // ==========================================
+        
+        const PRECO_PLANOS = {
+            diario: 29.90,
+            semanal: 79.90,
+            mensal: 199.90
+        };
+
+        const HORARIOS = ['09:00', '15:00', '18:00'];
+        
+        let estado = {
+            plano: null,
+            dataSelecionada: null,
+            horarioSelecionado: null,
+            datasPlano: [], // Para planos semanais/mensais
+            horariosPlano: [], // Para planos semanais/mensais
+            mesAtual: new Date(),
+            disponibilidade: {} // Carregado do servidor
+        };
+
+        // ==========================================
+        // ELEMENTOS DOM
+        // ==========================================
+        
+        const form = document.getElementById('agendamentoForm');
+        const radioPlanos = document.querySelectorAll('input[name="plano"]');
+        const fileInput = document.getElementById('comprovante');
+        const messageDiv = document.getElementById('message');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // ==========================================
+        // EVENT LISTENERS - PLANO
+        // ==========================================
+        
+        radioPlanos.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                estado.plano = e.target.value;
+                
+                // Atualizar visual
+                document.querySelectorAll('.plano-card').forEach(card => {
+                    card.classList.remove('selecionado');
+                });
+                e.target.parentElement.classList.add('selecionado');
+
+                // Atualizar steps
+                atualizarSteps();
+                
+                // Mostrar/esconder calendário
+                if (estado.plano) {
+                    document.getElementById('calendarioSection').classList.add('ativo');
+                    gerarCalendario(estado.mesAtual);
+                }
+
+                // Atualizar resumo
+                atualizarResumo();
+            });
+        });
+
+        // ==========================================
+        // FILE UPLOAD - ARTE
+        // ==========================================
+        
+        const fileInputArte = document.getElementById('arte');
+        const fileLabelArte = document.getElementById('fileLabelArte');
+        const imagePreviewArte = document.getElementById('imagePreviewArte');
+        const previewImgArte = document.getElementById('previewImgArte');
+
+        fileLabelArte.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileLabelArte.classList.add('has-file');
+        });
+
+        fileLabelArte.addEventListener('dragleave', () => {
+            fileLabelArte.classList.remove('has-file');
+        });
+
+        fileLabelArte.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileLabelArte.classList.remove('has-file');
+            if (e.dataTransfer.files.length > 0) {
+                fileInputArte.files = e.dataTransfer.files;
+                previewFile(e.dataTransfer.files[0], 'arte');
+            }
+        });
+
+        fileInputArte.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                previewFile(e.target.files[0], 'arte');
+                fileLabelArte.classList.add('has-file');
+            }
+        });
+
+        // ==========================================
+        // FILE UPLOAD - COMPROVANTE
+        // ==========================================
+        
+        const fileInputComprovante = document.getElementById('comprovante');
+        const fileLabelComprovante = document.getElementById('fileLabelComprovante');
+        const imagePreviewComprovante = document.getElementById('imagePreviewComprovante');
+        const previewImgComprovante = document.getElementById('previewImgComprovante');
+
+        fileLabelComprovante.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileLabelComprovante.classList.add('has-file');
+        });
+
+        fileLabelComprovante.addEventListener('dragleave', () => {
+            fileLabelComprovante.classList.remove('has-file');
+        });
+
+        fileLabelComprovante.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileLabelComprovante.classList.remove('has-file');
+            if (e.dataTransfer.files.length > 0) {
+                fileInputComprovante.files = e.dataTransfer.files;
+                previewFile(e.dataTransfer.files[0], 'comprovante');
+            }
+        });
+
+        fileInputComprovante.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                previewFile(e.target.files[0], 'comprovante');
+                fileLabelComprovante.classList.add('has-file');
+            }
+        });
+
+        function previewFile(file, tipo) {
+            if (file.size > 5 * 1024 * 1024) {
+                showMessage('Arquivo muito grande (máx. 5MB)', 'error');
+                if (tipo === 'arte') {
+                    fileInputArte.value = '';
+                    imagePreviewArte.style.display = 'none';
+                } else {
+                    fileInputComprovante.value = '';
+                    imagePreviewComprovante.style.display = 'none';
+                }
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                if (tipo === 'arte') {
+                    previewImgArte.src = e.target.result;
+                    imagePreviewArte.style.display = 'block';
+                } else {
+                    previewImgComprovante.src = e.target.result;
+                    imagePreviewComprovante.style.display = 'block';
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // ==========================================
+        // CALENDÁRIO
+        // ==========================================
+        
+        function gerarCalendario(data) {
+            const calendario = document.getElementById('calendario');
+            const mesTitulo = document.getElementById('mesTitulo');
+            calendario.innerHTML = '';
+
+            const mes = data.getMonth();
+            const ano = data.getFullYear();
+            const hoje = new Date();
+
+            // Título
+            const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                          'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            mesTitulo.textContent = `${meses[mes]} ${ano}`;
+
+            // Cabeçalho dias da semana
+            const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+            diasSemana.forEach(dia => {
+                const header = document.createElement('div');
+                header.className = 'dia-header';
+                header.textContent = dia;
+                calendario.appendChild(header);
+            });
+
+            // Dias do mês
+            const primeiroDia = new Date(ano, mes, 1);
+            const ultimoDia = new Date(ano, mes + 1, 0);
+            const diasAnterior = primeiroDia.getDay();
+            const diasNoMes = ultimoDia.getDate();
+
+            // Dias mês anterior
+            for (let i = diasAnterior - 1; i >= 0; i--) {
+                const dia = document.createElement('div');
+                dia.className = 'dia outro-mes';
+                dia.textContent = new Date(ano, mes, -i).getDate();
+                calendario.appendChild(dia);
+            }
+
+            // Dias do mês atual
+            for (let d = 1; d <= diasNoMes; d++) {
+                const data = new Date(ano, mes, d);
+                const dia = document.createElement('div');
+                dia.className = 'dia disponivel';
+
+                // Desabilita dias passados
+                if (data < hoje && data.getHours() === 0) {
+                    dia.classList.remove('disponivel');
+                    dia.classList.add('outro-mes');
+                }
+
+                dia.innerHTML = `<div class="dia-numero">${d}</div>`;
+
+                // Simular disponibilidade (vai vir do servidor depois)
+                const disponivel = Math.random() > 0.3;
+                if (!disponivel) {
+                    dia.classList.add('lotado');
+                } else {
+                    dia.addEventListener('click', () => selecionarData(data));
+                }
+
+                calendario.appendChild(dia);
+            }
+
+            // Dias próximo mês
+            for (let d = 1; d <= (42 - diasAnterior - diasNoMes); d++) {
+                const dia = document.createElement('div');
+                dia.className = 'dia outro-mes';
+                dia.textContent = d;
+                calendario.appendChild(dia);
+            }
+        }
+
+        function selecionarData(data) {
+            estado.dataSelecionada = data;
+            
+            // Atualizar visual
+            document.querySelectorAll('.dia').forEach(el => el.classList.remove('selecionado'));
+            event.target.closest('.dia').classList.add('selecionado');
+
+            // Mostrar horários
+            document.getElementById('horariosSection').classList.add('ativo');
+            gerarHorarios();
+
+            // Atualizar steps
+            atualizarSteps();
+            atualizarResumo();
+        }
+
+        document.getElementById('mesAnterior').addEventListener('click', (e) => {
+            e.preventDefault();
+            estado.mesAtual.setMonth(estado.mesAtual.getMonth() - 1);
+            gerarCalendario(estado.mesAtual);
+        });
+
+        document.getElementById('mesProximo').addEventListener('click', (e) => {
+            e.preventDefault();
+            estado.mesAtual.setMonth(estado.mesAtual.getMonth() + 1);
+            gerarCalendario(estado.mesAtual);
+        });
+
+        // ==========================================
+        // HORÁRIOS
+        // ==========================================
+        
+        function gerarHorarios() {
+            const grid = document.getElementById('horariosGrid');
+            grid.innerHTML = '';
+
+            HORARIOS.forEach(horario => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'horario-btn';
+                btn.textContent = horario;
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    selecionarHorario(horario);
+                });
+                grid.appendChild(btn);
+            });
+        }
+
+        function selecionarHorario(horario) {
+            estado.horarioSelecionado = horario;
+
+            // Atualizar visual
+            document.querySelectorAll('.horario-btn').forEach(btn => {
+                btn.classList.remove('selecionado');
+            });
+            event.target.classList.add('selecionado');
+
+            // Atualizar steps e resumo
+            atualizarSteps();
+            atualizarResumo();
+        }
+
+        // ==========================================
+        // ATUALIZAR INTERFACE
+        // ==========================================
+        
+        function atualizarSteps() {
+            const steps = document.querySelectorAll('.step');
+            
+            steps[0].classList.add('completo'); // Plano
+            
+            if (estado.plano) {
+                steps[1].classList.add('ativo');
+            }
+            
+            if (document.getElementById('nomeNegocio').value.trim()) {
+                steps[2].classList.add('ativo');
+            }
+            
+            if (estado.dataSelecionada) {
+                steps[3].classList.add('ativo');
+            }
+            
+            if (estado.horarioSelecionado) {
+                steps[4].classList.add('ativo');
+            }
+        }
+
+        function atualizarResumo() {
+            const plano = estado.plano || '-';
+            const negocio = document.getElementById('nomeNegocio').value || '-';
+            const data = estado.dataSelecionada ? 
+                estado.dataSelecionada.toLocaleDateString('pt-BR') : '-';
+            const horario = estado.horarioSelecionado || '-';
+            const valor = estado.plano ? 'R$ ' + PRECO_PLANOS[estado.plano].toFixed(2) : '-';
+
+            document.getElementById('resumoPlano').textContent = 
+                plano === 'diario' ? 'Diário' : 
+                plano === 'semanal' ? 'Semanal (3x)' : 
+                plano === 'mensal' ? 'Mensal (4x)' : '-';
+            
+            document.getElementById('resumoNegocio').textContent = negocio;
+            document.getElementById('resumoDatas').textContent = data;
+            document.getElementById('resumoHorarios').textContent = horario;
+            document.getElementById('resumoValor').textContent = valor;
+        }
+
+        function showMessage(text, type) {
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.display = 'block';
+            if (type !== 'loading') {
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // ==========================================
+        // SUBMIT
+        // ==========================================
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const instagram = document.getElementById('instagram').value.trim();
+            const nomeNegocio = document.getElementById('nomeNegocio').value.trim();
+            const promocao = document.getElementById('promocao').value.trim();
+            const arte = fileInputArte.files[0];
+            const comprovante = fileInputComprovante.files[0];
+
+            if (!estado.plano || !instagram || !nomeNegocio || !promocao || !arte || !comprovante) {
+                showMessage('Preencha todos os campos (incluindo arte e comprovante)', 'error');
+                return;
+            }
+
+            if (!estado.dataSelecionada || !estado.horarioSelecionado) {
+                showMessage('Escolha data e horário', 'error');
+                return;
+            }
+
+            showMessage('Processando...', 'loading');
+            submitBtn.disabled = true;
+
+            try {
+                // Ler ambos os arquivos em paralelo
+                const [base64Arte, base64Comprovante] = await Promise.all([
+                    readFileAsDataURL(arte),
+                    readFileAsDataURL(comprovante)
+                ]);
+
+                const formData = new FormData();
+                formData.append('plano', estado.plano);
+                formData.append('instagram', instagram);
+                formData.append('nomeNegocio', nomeNegocio);
+                formData.append('promocao', promocao);
+                formData.append('arte', base64Arte);
+                formData.append('comprovante', base64Comprovante);
+                formData.append('data', estado.dataSelecionada.toISOString().split('T')[0]);
+                formData.append('horario', estado.horarioSelecionado);
+
+                try {
+                    const response = await fetch('GOOGLE_APPS_SCRIPT_URL', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const result = await response.text();
+                    
+                    if (result.includes('sucesso')) {
+                        showMessage('✅ Agendamento confirmado! Sua promoção será postada no horário agendado.', 'success');
+                        form.reset();
+                        imagePreviewArte.style.display = 'none';
+                        imagePreviewComprovante.style.display = 'none';
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    } else {
+                        showMessage('Erro ao agendar. Tente novamente.', 'error');
+                    }
+                } catch (error) {
+                    showMessage('Erro ao enviar. Verifique sua conexão.', 'error');
+                } finally {
+                    submitBtn.disabled = false;
+                }
+            } catch (error) {
+                showMessage('Erro ao processar arquivos', 'error');
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Função auxiliar para ler arquivo como Data URL
+        function readFileAsDataURL(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Inicializar
+        gerarCalendario(estado.mesAtual);
+    </script>
+</body>
+</html>
