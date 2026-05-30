@@ -3,238 +3,267 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sudoeste Meu Amor</title>
+<title>Agende sua Promoção — Sudoeste Meu Amor</title>
+<meta name="description" content="Anuncie seu negócio para moradores do Sudoeste. Escolha seu plano, envie sua arte e a gente posta no grupo no horário certo.">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --green-deep:   #1A7A3E;
-  --green-mid:    #2E9460;
-  --green-bright: #3AA76D;
-  --green-light:  #A8D5B5;
-  --green-pale:   #EAF6EE;
-  --white:        #FFFFFF;
-  --off-white:    #F7FBF8;
-  --text:         #0F2A1A;
-  --text-mid:     #3D6B50;
-  --text-light:   #7AAA8A;
-  --gold:         #C9A84C;
-  --shadow-sm:    0 2px 12px rgba(26,74,46,.10);
-  --shadow-md:    0 8px 32px rgba(26,74,46,.14);
-  --shadow-lg:    0 20px 60px rgba(26,74,46,.18);
-  --r:            14px;
+  --g-deep:   #1A7A3E;
+  --g-mid:    #2E9460;
+  --g-bright: #3AA76D;
+  --g-light:  #A8D5B5;
+  --g-pale:   #EAF6EE;
+  --white:    #FFFFFF;
+  --off:      #F7FBF8;
+  --text:     #0F2A1A;
+  --tmid:     #3D6B50;
+  --tlight:   #7AAA8A;
+  --gold:     #C9A84C;
+  --red:      #DC2626;
+  --r:        12px;
+  --sh-sm: 0 2px 12px rgba(26,74,46,.10);
+  --sh-md: 0 8px 32px rgba(26,74,46,.14);
 }
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--off);color:var(--text);min-height:100vh;}
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body { font-family:'Outfit',sans-serif; background:var(--off-white); color:var(--text); }
-
-/* HEADER */
-header {
-  background:var(--green-deep);
-  position:sticky; top:0; z-index:100;
-  padding:0 24px;
-  display:flex; align-items:center; justify-content:space-between;
-  height:62px;
-  border-bottom:2px solid var(--green-mid);
+/* ── HEADER ── */
+header{
+  background:var(--g-deep);
+  padding:0 24px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:2px solid var(--g-mid);
+  position:sticky;top:0;z-index:50;
 }
-.logo { font-family:'Fraunces',serif; font-size:20px; color:var(--white); letter-spacing:-.3px; display:flex; align-items:center; gap:8px; }
-.logo-leaf { font-size:22px; }
-.logo em { color:var(--green-light); font-style:italic; }
-nav { display:flex; gap:6px; align-items:center; }
-.nav-btn { background:none; border:none; cursor:pointer; font-family:'Outfit',sans-serif; font-size:13px; font-weight:500; color:rgba(255,255,255,.7); padding:7px 13px; border-radius:8px; transition:.2s; }
-.nav-btn:hover, .nav-btn.active { background:rgba(255,255,255,.12); color:var(--white); }
-.nav-cta { background:var(--green-bright); color:var(--white) !important; border-radius:24px; font-weight:600 !important; }
-.nav-cta:hover { background:#2e9460 !important; }
-.nav-agendar { background:rgba(201,168,76,.2); border:1px solid rgba(201,168,76,.4); color:var(--gold) !important; border-radius:24px; font-weight:600 !important; }
-.nav-agendar:hover { background:rgba(201,168,76,.35) !important; }
+.logo{font-family:'Fraunces',serif;font-size:19px;color:var(--white);display:flex;align-items:center;gap:8px;text-decoration:none;}
+.logo em{color:var(--g-light);font-style:italic;}
+.insta-link{font-size:12px;color:rgba(255,255,255,.6);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:5px;}
+.insta-link:hover{color:var(--g-light);}
 
-/* HERO */
-.hero { background:var(--green-deep); padding:56px 24px 48px; text-align:center; position:relative; overflow:hidden; }
-.hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 50% at 20% 50%, rgba(58,167,109,.18) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 50%, rgba(168,213,181,.10) 0%, transparent 60%); }
-.hero::after { content:'🌿'; position:absolute; right:-10px; top:-10px; font-size:180px; opacity:.06; transform:rotate(-20deg); }
-.hero-pill { display:inline-flex; align-items:center; gap:6px; background:rgba(58,167,109,.2); border:1px solid rgba(58,167,109,.4); color:var(--green-light); font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; padding:5px 14px; border-radius:20px; margin-bottom:20px; }
-.hero h1 { font-family:'Fraunces',serif; font-size:clamp(34px,6vw,64px); color:var(--white); line-height:1.08; margin-bottom:16px; }
-.hero h1 em { color:var(--green-light); font-style:italic; }
-.hero p { color:rgba(255,255,255,.6); font-size:16px; max-width:440px; margin:0 auto 32px; line-height:1.65; }
-.search-wrap { display:flex; max-width:500px; margin:0 auto 36px; background:rgba(255,255,255,.08); border:1.5px solid rgba(255,255,255,.15); border-radius:50px; padding:6px 6px 6px 20px; backdrop-filter:blur(12px); }
-.search-wrap input { flex:1; background:none; border:none; outline:none; color:var(--white); font-family:'Outfit',sans-serif; font-size:15px; }
-.search-wrap input::placeholder { color:rgba(255,255,255,.35); }
-.search-wrap button { background:var(--green-bright); border:none; cursor:pointer; color:var(--white); font-weight:600; font-size:13px; padding:9px 22px; border-radius:40px; transition:.2s; font-family:'Outfit',sans-serif; }
-.search-wrap button:hover { background:#2e9460; }
-.hero-stats { display:flex; justify-content:center; border:1px solid rgba(255,255,255,.1); border-radius:16px; overflow:hidden; max-width:420px; margin:0 auto; background:rgba(255,255,255,.04); backdrop-filter:blur(10px); }
-.h-stat { flex:1; padding:14px 10px; text-align:center; border-right:1px solid rgba(255,255,255,.1); }
-.h-stat:last-child { border-right:none; }
-.h-stat strong { display:block; font-family:'Space Mono',monospace; font-size:22px; color:var(--green-light); }
-.h-stat span { font-size:11px; color:rgba(255,255,255,.4); text-transform:uppercase; letter-spacing:.8px; }
-
-/* TABS */
-.tab-bar { background:var(--white); border-bottom:2px solid var(--green-pale); padding:0 24px; display:flex; gap:4px; overflow-x:auto; }
-.tab-bar::-webkit-scrollbar { display:none; }
-.tab { background:none; border:none; cursor:pointer; font-family:'Outfit',sans-serif; font-size:14px; font-weight:500; color:var(--text-light); padding:16px 14px; border-bottom:2px solid transparent; margin-bottom:-2px; white-space:nowrap; transition:.2s; }
-.tab:hover { color:var(--green-mid); }
-.tab.active { color:var(--green-deep); border-color:var(--green-bright); font-weight:600; }
-.filters-bar { background:var(--green-pale); padding:12px 24px; display:flex; gap:8px; overflow-x:auto; align-items:center; }
-.filters-bar::-webkit-scrollbar { display:none; }
-.f-btn { background:var(--white); border:1.5px solid var(--green-light); color:var(--text-mid); font-family:'Outfit',sans-serif; font-size:12px; font-weight:500; padding:6px 14px; border-radius:20px; cursor:pointer; white-space:nowrap; transition:.2s; }
-.f-btn:hover, .f-btn.active { background:var(--green-deep); color:var(--white); border-color:var(--green-deep); }
-
-/* MAIN */
-main { max-width:1180px; margin:0 auto; padding:32px 24px; }
-.section-hd { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:20px; }
-.section-title { font-family:'Fraunces',serif; font-size:26px; font-weight:700; }
-.section-title span { color:var(--green-bright); }
-.see-all { font-size:13px; color:var(--green-mid); font-weight:600; cursor:pointer; }
-
-/* DESTAQUE */
-.dest-grid { display:grid; grid-template-columns:1.8fr 1fr 1fr; gap:16px; margin-bottom:48px; }
-@media(max-width:760px){ .dest-grid { grid-template-columns:1fr; } }
-
-/* CARDS */
-.co-card { background:var(--white); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow-sm); cursor:pointer; transition:transform .28s, box-shadow .28s; border:1px solid rgba(168,213,181,.4); }
-.co-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-md); }
-.co-cover { height:120px; display:flex; align-items:center; justify-content:center; font-size:36px; position:relative; }
-.co-logo { position:absolute; bottom:-18px; left:14px; width:42px; height:42px; border-radius:10px; background:var(--white); border:2px solid var(--green-pale); display:flex; align-items:center; justify-content:center; font-size:20px; box-shadow:var(--shadow-sm); }
-.co-body { padding:26px 14px 14px; }
-.co-cat { font-size:10px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--green-mid); margin-bottom:4px; }
-.co-name { font-family:'Fraunces',serif; font-size:17px; font-weight:700; line-height:1.2; margin-bottom:3px; }
-.co-desc-small { font-size:12px; color:var(--text-light); margin-bottom:10px; line-height:1.4; }
-.co-addr { font-size:11px; color:var(--text-light); margin-bottom:10px; display:flex; align-items:flex-start; gap:3px; }
-.co-bottom { display:flex; justify-content:space-between; align-items:center; padding-top:8px; border-top:1px solid var(--green-pale); }
-.co-stars { color:var(--gold); font-size:12px; }
-.co-rating { font-size:12px; color:var(--text-light); margin-left:3px; }
-.disc-badge { background:var(--green-deep); color:var(--white); font-family:'Space Mono',monospace; font-size:12px; font-weight:700; padding:3px 9px; border-radius:7px; }
-.map-mini-btn { background:none; border:1.5px solid var(--green-light); color:var(--green-mid); font-size:11px; font-weight:600; padding:4px 10px; border-radius:8px; cursor:pointer; display:flex; align-items:center; gap:4px; font-family:'Outfit',sans-serif; transition:.2s; }
-.map-mini-btn:hover { background:var(--green-deep); color:var(--white); border-color:var(--green-deep); }
-.companies-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:18px; margin-bottom:48px; }
-
-/* AGENDAMENTO BANNER */
-.promo-section {
-  background:linear-gradient(135deg, #0F2A1A 0%, #1A7A3E 60%, #2E9460 100%);
-  border-radius:20px; padding:40px 32px; margin-bottom:48px;
-  position:relative; overflow:hidden;
-  display:grid; grid-template-columns:1fr auto; gap:32px; align-items:center;
+/* ── HERO ── */
+.hero{
+  background:var(--g-deep);
+  padding:44px 20px 36px;
+  text-align:center;position:relative;overflow:hidden;
 }
-@media(max-width:680px){ .promo-section { grid-template-columns:1fr; } }
-.promo-section::before { content:'📣'; position:absolute; right:-20px; top:-20px; font-size:160px; opacity:.07; }
-.promo-tag { display:inline-block; background:rgba(201,168,76,.2); border:1px solid rgba(201,168,76,.4); color:var(--gold); font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:4px 12px; border-radius:20px; margin-bottom:14px; }
-.promo-title { font-family:'Fraunces',serif; font-size:clamp(22px,4vw,32px); color:var(--white); line-height:1.1; margin-bottom:10px; }
-.promo-title em { color:var(--green-light); font-style:italic; }
-.promo-sub { color:rgba(255,255,255,.55); font-size:15px; margin-bottom:28px; line-height:1.6; max-width:520px; }
-.promo-plans { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:28px; }
-.plan-chip { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:12px; padding:12px 16px; text-align:center; min-width:100px; }
-.plan-chip-name { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:4px; }
-.plan-chip-price { font-family:'Space Mono',monospace; font-size:18px; color:var(--white); font-weight:700; }
-.plan-chip-freq { font-size:10px; color:rgba(255,255,255,.35); margin-top:2px; }
-.promo-cta { background:var(--gold); color:#0F2A1A; font-family:'Outfit',sans-serif; font-size:16px; font-weight:700; padding:16px 32px; border-radius:14px; border:none; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:.25s; white-space:nowrap; }
-.promo-cta:hover { background:#e0b954; transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,168,76,.3); }
-.promo-right { display:flex; flex-direction:column; align-items:center; gap:16px; }
-.promo-badge { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:20px 24px; text-align:center; }
-.promo-badge-num { font-family:'Space Mono',monospace; font-size:32px; color:var(--gold); font-weight:700; }
-.promo-badge-lbl { font-size:12px; color:rgba(255,255,255,.4); margin-top:4px; }
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(58,167,109,.2) 0%,transparent 70%);
+}
+.hero::after{content:'📣';position:absolute;right:-8px;top:-8px;font-size:160px;opacity:.05;transform:rotate(-15deg);}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);
+  color:var(--gold);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 13px;border-radius:20px;margin-bottom:18px;
+}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(26px,5vw,46px);color:var(--white);line-height:1.1;margin-bottom:12px;}
+.hero h1 em{color:var(--g-light);font-style:italic;}
+.hero p{color:rgba(255,255,255,.6);font-size:15px;max-width:460px;margin:0 auto 28px;line-height:1.65;}
 
-/* MORADOR */
-.resident-section { background:linear-gradient(135deg, var(--green-deep) 0%, #0F3320 100%); border-radius:20px; padding:40px 32px; margin-bottom:48px; position:relative; overflow:hidden; }
-.resident-section::before { content:'🏘️'; position:absolute; right:-20px; top:-20px; font-size:160px; opacity:.06; }
-.rs-tag { display:inline-block; background:rgba(58,167,109,.25); border:1px solid rgba(58,167,109,.4); color:var(--green-light); font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:4px 12px; border-radius:20px; margin-bottom:14px; }
-.rs-title { font-family:'Fraunces',serif; font-size:clamp(22px,4vw,32px); color:var(--white); line-height:1.1; margin-bottom:10px; }
-.rs-title em { color:var(--green-light); font-style:italic; }
-.rs-sub { color:rgba(255,255,255,.55); font-size:15px; margin-bottom:28px; line-height:1.6; max-width:500px; }
-.rs-perks { display:flex; gap:24px; flex-wrap:wrap; margin-bottom:28px; }
-.perk { display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.06); border-radius:10px; padding:10px 14px; }
-.perk-icon { font-size:20px; }
-.perk-text { font-size:13px; color:rgba(255,255,255,.8); font-weight:500; }
-.rs-form { display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:600px; }
-@media(max-width:560px){ .rs-form { grid-template-columns:1fr; } }
-.rs-input, .rs-select { background:rgba(255,255,255,.1); border:1.5px solid rgba(255,255,255,.15); border-radius:10px; padding:11px 14px; color:var(--white); font-family:'Outfit',sans-serif; font-size:14px; outline:none; transition:.2s; width:100%; }
-.rs-input::placeholder { color:rgba(255,255,255,.35); }
-.rs-input:focus, .rs-select:focus { border-color:var(--green-bright); background:rgba(255,255,255,.14); }
-.rs-select option { background:var(--green-deep); color:var(--white); }
-.rs-full { grid-column:1/-1; }
-.rs-btn { grid-column:1/-1; background:var(--green-bright); color:var(--white); border:none; font-family:'Outfit',sans-serif; font-size:15px; font-weight:700; padding:14px; border-radius:12px; cursor:pointer; transition:.2s; }
-.rs-btn:hover { background:#2e9460; transform:translateY(-1px); }
-.success-card { display:none; background:linear-gradient(135deg,var(--green-deep),#0F3320); border-radius:16px; padding:28px; text-align:center; color:var(--white); grid-column:1/-1; animation:fadeIn .4s ease; }
-.success-card.show { display:block; }
-.success-icon { font-size:48px; margin-bottom:10px; }
-.success-card h3 { font-family:'Fraunces',serif; font-size:20px; margin-bottom:6px; }
-.success-card p { font-size:14px; color:rgba(255,255,255,.6); line-height:1.6; }
-.email-preview { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:12px; padding:16px; margin-top:14px; text-align:left; }
-.ep-label { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--green-light); margin-bottom:8px; }
-.ep-subject { font-weight:600; font-size:14px; margin-bottom:4px; }
-.ep-body { font-size:12px; color:rgba(255,255,255,.55); line-height:1.6; }
+/* stats */
+.hero-stats{
+  display:inline-flex;border:1px solid rgba(255,255,255,.1);border-radius:14px;
+  overflow:hidden;background:rgba(255,255,255,.04);backdrop-filter:blur(10px);
+}
+.hstat{padding:12px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.1);}
+.hstat:last-child{border-right:none;}
+.hstat strong{display:block;font-family:'Space Mono',monospace;font-size:18px;color:var(--g-light);}
+.hstat span{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;}
 
-/* MODAL */
-.overlay { display:none; position:fixed; inset:0; background:rgba(15,42,26,.75); z-index:200; backdrop-filter:blur(6px); align-items:center; justify-content:center; padding:16px; }
-.overlay.open { display:flex; animation:fadeIn .2s ease; }
-@keyframes fadeIn { from{opacity:0}to{opacity:1} }
-.modal { background:var(--white); border-radius:22px; width:100%; max-width:600px; max-height:92vh; overflow-y:auto; box-shadow:var(--shadow-lg); animation:slideUp .3s ease; }
-@keyframes slideUp { from{transform:translateY(28px);opacity:0}to{transform:translateY(0);opacity:1} }
-.modal-cover { height:190px; display:flex; align-items:center; justify-content:center; font-size:60px; position:relative; }
-.modal-x { position:absolute; top:12px; right:12px; background:rgba(0,0,0,.35); border:none; color:var(--white); width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; transition:.2s; }
-.modal-x:hover { background:rgba(0,0,0,.6); }
-.modal-logo-big { position:absolute; bottom:-22px; left:22px; width:56px; height:56px; border-radius:14px; background:var(--white); border:2.5px solid var(--green-pale); display:flex; align-items:center; justify-content:center; font-size:26px; box-shadow:var(--shadow-md); }
-.modal-bd { padding:34px 22px 22px; }
-.modal-cat { font-size:11px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--green-mid); }
-.modal-name { font-family:'Fraunces',serif; font-size:26px; font-weight:900; margin:4px 0 10px; line-height:1.1; }
-.modal-desc { font-size:14px; color:var(--text-mid); line-height:1.7; margin-bottom:18px; }
-.disc-big { background:linear-gradient(135deg,var(--green-deep),var(--green-mid)); color:var(--white); border-radius:14px; padding:18px; text-align:center; margin-bottom:18px; }
-.disc-pct { font-family:'Space Mono',monospace; font-size:44px; font-weight:700; line-height:1; }
-.disc-label { font-size:13px; opacity:.7; margin-top:4px; }
-.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
-.info-box { background:var(--green-pale); border-radius:10px; padding:12px; }
-.info-lbl { font-size:10px; font-weight:600; color:var(--text-light); text-transform:uppercase; letter-spacing:.8px; margin-bottom:3px; }
-.info-val { font-size:14px; font-weight:600; color:var(--text); }
-.map-btn-modal { width:100%; background:var(--green-pale); border:1.5px solid var(--green-light); color:var(--green-deep); font-family:'Outfit',sans-serif; font-weight:600; font-size:14px; padding:13px; border-radius:12px; cursor:pointer; transition:.2s; display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:20px; }
-.map-btn-modal:hover { background:var(--green-deep); color:var(--white); border-color:var(--green-deep); }
-.rate-section h3 { font-family:'Fraunces',serif; font-size:16px; margin-bottom:10px; }
-.stars-row { display:flex; gap:4px; margin-bottom:10px; }
-.s-btn { font-size:26px; background:none; border:none; cursor:pointer; color:#D0D8C0; transition:.15s; }
-.s-btn.on, .s-btn:hover { color:var(--gold); transform:scale(1.2); }
-.rev-inp { width:100%; border:1.5px solid var(--green-light); border-radius:10px; padding:10px 13px; font-family:'Outfit',sans-serif; font-size:14px; color:var(--text); resize:none; outline:none; background:var(--green-pale); transition:.2s; }
-.rev-inp:focus { border-color:var(--green-bright); }
-.rev-submit { background:var(--green-bright); color:var(--white); border:none; font-family:'Outfit',sans-serif; font-size:14px; font-weight:600; padding:10px 24px; border-radius:24px; cursor:pointer; margin-top:8px; transition:.2s; }
-.rev-submit:hover { background:#2e9460; }
-.reviews-list { margin-top:14px; display:flex; flex-direction:column; gap:10px; }
-.rev-item { background:var(--green-pale); border-radius:10px; padding:12px; }
-.rev-hd { display:flex; justify-content:space-between; margin-bottom:5px; }
-.rev-name { font-weight:600; font-size:13px; }
-.rev-stars { color:var(--gold); font-size:12px; }
-.rev-txt { font-size:13px; color:var(--text-mid); line-height:1.5; }
+/* ── PLANOS TOPO ── */
+.plans-top{background:var(--white);border-bottom:2px solid var(--g-pale);padding:0;}
+.plans-scroll{display:flex;overflow-x:auto;gap:0;}
+.plans-scroll::-webkit-scrollbar{display:none;}
+.plan-tab{
+  flex:1;min-width:120px;padding:14px 10px;text-align:center;
+  border-bottom:3px solid transparent;cursor:pointer;transition:.2s;
+  border-right:1px solid var(--g-pale);
+}
+.plan-tab:last-child{border-right:none;}
+.plan-tab:hover{background:var(--g-pale);}
+.plan-tab.active{border-bottom-color:var(--g-deep);background:var(--g-pale);}
+.plan-tab-emoji{font-size:20px;margin-bottom:3px;}
+.plan-tab-name{font-family:'Fraunces',serif;font-size:14px;font-weight:700;}
+.plan-tab-price{font-family:'Space Mono',monospace;font-size:13px;color:var(--g-deep);margin-top:1px;}
 
-/* ADD COMPANY MODAL */
-.add-modal .modal { max-width:640px; }
-.form-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-@media(max-width:500px){ .form-grid2 { grid-template-columns:1fr; } }
-.f-lbl { font-size:11px; font-weight:600; color:var(--text-mid); text-transform:uppercase; letter-spacing:.7px; display:block; margin-bottom:5px; }
-.f-inp, .f-sel, .f-tex { width:100%; border:1.5px solid var(--green-light); border-radius:10px; padding:10px 13px; font-family:'Outfit',sans-serif; font-size:14px; color:var(--text); outline:none; transition:.2s; background:var(--off-white); }
-.f-inp:focus,.f-sel:focus,.f-tex:focus { border-color:var(--green-bright); }
-.f-tex { resize:vertical; min-height:78px; }
-.f-full { grid-column:1/-1; }
-.f-submit { width:100%; background:var(--green-deep); color:var(--white); border:none; font-family:'Outfit',sans-serif; font-size:15px; font-weight:700; padding:14px; border-radius:12px; cursor:pointer; transition:.2s; margin-top:4px; }
-.f-submit:hover { background:var(--green-mid); }
-.emoji-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:5px; }
-.em-opt { width:38px; height:38px; border-radius:9px; border:1.5px solid var(--green-light); background:var(--off-white); cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; transition:.2s; }
-.em-opt.sel, .em-opt:hover { border-color:var(--green-bright); background:var(--green-pale); }
+/* ── MAIN ── */
+.page{max-width:720px;margin:0 auto;padding:28px 20px 60px;}
 
-/* TOAST */
-.toast { position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--green-deep); color:var(--white); padding:11px 22px; border-radius:24px; font-size:14px; font-weight:500; box-shadow:var(--shadow-lg); z-index:300; transition:transform .3s ease; pointer-events:none; border-left:3px solid var(--green-bright); }
-.toast.show { transform:translateX(-50%) translateY(0); }
+/* ── CARD ── */
+.card{background:var(--white);border-radius:var(--r);border:1px solid rgba(168,213,181,.35);box-shadow:var(--sh-sm);padding:24px;margin-bottom:16px;}
+.card-title{font-family:'Fraunces',serif;font-size:18px;font-weight:700;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--g-pale);display:flex;align-items:center;gap:8px;}
+.card-sub{font-size:13px;color:var(--tlight);margin-top:-12px;margin-bottom:16px;}
 
-/* FOOTER */
-footer { background:var(--green-deep); color:rgba(255,255,255,.5); padding:36px 24px 24px; text-align:center; border-top:2px solid var(--green-mid); }
-.footer-logo { font-family:'Fraunces',serif; font-size:22px; color:var(--white); margin-bottom:6px; }
-.footer-logo em { color:var(--green-light); font-style:italic; }
-footer p { font-size:13px; max-width:380px; margin:0 auto 18px; line-height:1.6; }
-footer small { font-size:11px; color:rgba(255,255,255,.25); }
-.footer-social { margin:14px 0; }
-.footer-social a { color:var(--green-light); font-size:13px; font-weight:600; text-decoration:none; }
-.footer-social a:hover { text-decoration:underline; }
-.footer-links { display:flex; justify-content:center; gap:20px; margin-top:12px; }
-.footer-links a { color:rgba(255,255,255,.4); font-size:12px; text-decoration:none; transition:.2s; }
-.footer-links a:hover { color:var(--green-light); }
+/* ── PLANO SELECIONADO BANNER ── */
+.plan-selected-banner{
+  background:linear-gradient(135deg,var(--g-deep),var(--g-mid));
+  border-radius:10px;padding:14px 18px;margin-bottom:20px;
+  display:flex;align-items:center;justify-content:space-between;
+  display:none;
+}
+.plan-selected-banner.show{display:flex;}
+.psb-left{color:var(--white);}
+.psb-name{font-family:'Fraunces',serif;font-size:16px;font-weight:700;}
+.psb-desc{font-size:12px;color:rgba(255,255,255,.6);margin-top:2px;}
+.psb-price{font-family:'Space Mono',monospace;font-size:22px;color:var(--g-light);font-weight:700;}
 
-@media(max-width:600px){
-  .nav-btn:not(.nav-cta):not(.nav-agendar):not([data-show]) { display:none; }
-  .info-grid { grid-template-columns:1fr; }
+/* ── PLAN CARDS (expandido) ── */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:4px;}
+@media(max-width:500px){.plans-grid{grid-template-columns:1fr;}}
+.plan-card{border:2px solid var(--g-light);border-radius:10px;padding:16px 12px;cursor:pointer;transition:.25s;text-align:center;position:relative;background:var(--off);}
+.plan-card:hover{border-color:var(--g-mid);transform:translateY(-2px);box-shadow:var(--sh-sm);}
+.plan-card.active{border-color:var(--g-deep);background:var(--g-pale);box-shadow:0 0 0 3px rgba(26,122,62,.12);}
+.plan-card input[type="radio"]{display:none;}
+.plan-pop{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--gold);color:#0F2A1A;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 10px;border-radius:20px;white-space:nowrap;}
+.plan-card .p-emoji{font-size:24px;margin-bottom:6px;}
+.plan-card .p-name{font-family:'Fraunces',serif;font-size:16px;font-weight:700;margin-bottom:3px;}
+.plan-card .p-price{font-family:'Space Mono',monospace;font-size:20px;color:var(--g-deep);font-weight:700;margin-bottom:2px;}
+.plan-card .p-freq{font-size:11px;color:var(--tlight);margin-bottom:8px;}
+.plan-card .p-items{font-size:11px;color:var(--tmid);line-height:1.7;text-align:left;}
+.plan-card .p-items li{list-style:none;padding-left:14px;position:relative;}
+.plan-card .p-items li::before{content:'✓';position:absolute;left:0;color:var(--g-bright);font-weight:700;}
+
+/* ── FORM ── */
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:520px){.frow{grid-template-columns:1fr;}}
+.fgroup{margin-bottom:14px;}
+.fgroup:last-child{margin-bottom:0;}
+.flbl{font-size:11px;font-weight:700;color:var(--tmid);text-transform:uppercase;letter-spacing:.7px;display:block;margin-bottom:5px;}
+.flbl .req{color:var(--red);}
+.finp,.fsel,.ftex{
+  width:100%;border:1.5px solid var(--g-light);border-radius:8px;
+  padding:10px 13px;font-family:'Outfit',sans-serif;font-size:14px;
+  color:var(--text);outline:none;transition:.2s;background:var(--white);
+}
+.finp:focus,.fsel:focus,.ftex:focus{border-color:var(--g-bright);box-shadow:0 0 0 3px rgba(58,167,109,.1);}
+.finp::placeholder,.ftex::placeholder{color:var(--tlight);}
+.finp.err,.ftex.err{border-color:var(--red);}
+.ftex{resize:vertical;min-height:80px;}
+.char-count{font-size:11px;color:var(--tlight);text-align:right;margin-top:3px;}
+
+/* ── UPLOAD ── */
+.upload-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:480px){.upload-wrap{grid-template-columns:1fr;}}
+.upload-zone{border:2px dashed var(--g-light);border-radius:10px;padding:20px 12px;text-align:center;cursor:pointer;transition:.25s;background:var(--off);position:relative;display:block;}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--g-mid);background:var(--g-pale);}
+.upload-zone.done{border-color:var(--g-bright);border-style:solid;background:var(--g-pale);}
+.upload-zone input{display:none;}
+.upload-ico{font-size:26px;margin-bottom:6px;}
+.upload-t{font-weight:600;font-size:13px;color:var(--tmid);margin-bottom:3px;}
+.upload-s{font-size:11px;color:var(--tlight);}
+.upload-prev{margin-top:10px;border-radius:6px;overflow:hidden;max-height:120px;display:none;}
+.upload-prev img{width:100%;display:block;object-fit:cover;}
+.upload-fn{font-size:11px;color:var(--g-deep);font-weight:600;margin-top:6px;display:none;}
+
+/* ── CALENDAR ── */
+.cal-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.cal-btn{background:var(--g-pale);border:1.5px solid var(--g-light);color:var(--g-deep);font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;padding:6px 14px;border-radius:7px;cursor:pointer;transition:.2s;}
+.cal-btn:hover{background:var(--g-deep);color:var(--white);border-color:var(--g-deep);}
+.cal-month{font-family:'Fraunces',serif;font-size:16px;font-weight:700;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cal-hdr{text-align:center;font-size:10px;font-weight:700;color:var(--tlight);text-transform:uppercase;padding:6px 0;}
+.cal-day{
+  aspect-ratio:1;border:1.5px solid var(--g-light);border-radius:7px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;cursor:pointer;transition:.2s;background:var(--white);
+}
+.cal-day:hover:not(.dis):not(.om){border-color:var(--g-mid);background:var(--g-pale);}
+.cal-day.sel{background:var(--g-deep);color:var(--white);border-color:var(--g-deep);}
+.cal-day.dis{opacity:.3;cursor:not-allowed;background:var(--off);}
+.cal-day.full{background:var(--off);color:var(--tlight);cursor:not-allowed;border-color:#ddd;}
+.cal-day.om{opacity:.2;cursor:default;border-color:transparent;background:transparent;}
+.cal-day .slots{font-size:8px;color:var(--g-mid);margin-top:1px;font-weight:400;}
+.cal-day.sel .slots{color:rgba(255,255,255,.6);}
+.cal-day.full .slots{color:var(--tlight);}
+
+/* aviso plano */
+.cal-info{background:var(--g-pale);border:1px solid var(--g-light);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--tmid);display:flex;align-items:center;gap:7px;margin-bottom:14px;}
+
+/* ── HORÁRIOS ── */
+.hor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.hor-btn{border:2px solid var(--g-light);border-radius:10px;padding:14px 8px;background:var(--white);cursor:pointer;transition:.25s;text-align:center;font-family:'Outfit',sans-serif;}
+.hor-btn:hover:not(:disabled){border-color:var(--g-mid);background:var(--g-pale);}
+.hor-btn.sel{background:var(--g-deep);border-color:var(--g-deep);color:var(--white);}
+.hor-btn:disabled{opacity:.35;cursor:not-allowed;}
+.hor-time{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;margin-bottom:3px;}
+.hor-lbl{font-size:11px;color:var(--tlight);}
+.hor-btn.sel .hor-lbl{color:rgba(255,255,255,.65);}
+
+/* ── RESUMO ── */
+.resumo{background:var(--g-pale);border:1.5px solid var(--g-light);border-radius:10px;padding:18px;margin-bottom:16px;}
+.res-title{font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:var(--g-deep);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.res-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:7px 0;border-bottom:1px solid rgba(168,213,181,.4);}
+.res-row:last-child{border-bottom:none;}
+.res-lbl{color:var(--tlight);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;}
+.res-val{font-weight:600;color:var(--tmid);}
+.res-total{font-family:'Space Mono',monospace;font-size:18px;color:var(--g-deep);font-weight:700;}
+
+/* ── SUBMIT ── */
+.submit-btn{
+  width:100%;background:linear-gradient(135deg,var(--g-deep) 0%,var(--g-mid) 100%);
+  color:var(--white);border:none;font-family:'Outfit',sans-serif;
+  font-size:16px;font-weight:700;padding:16px;border-radius:10px;
+  cursor:pointer;transition:.25s;display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.submit-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:var(--sh-md);}
+.submit-btn:disabled{opacity:.55;cursor:not-allowed;transform:none;}
+.submit-note{font-size:12px;color:var(--tlight);text-align:center;margin-top:10px;}
+
+/* ── MENSAGEM ── */
+.msg{padding:13px 16px;border-radius:9px;font-size:14px;font-weight:500;display:none;margin-bottom:16px;}
+.msg.ok{background:#e8f7f1;color:#1a7a2e;border:1.5px solid var(--g-bright);}
+.msg.err{background:#fef2f2;color:#991b1b;border:1.5px solid #fca5a5;}
+.msg.load{background:var(--g-pale);color:var(--g-deep);border:1.5px solid var(--g-bright);}
+
+/* ── LOADER ── */
+.loader{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,.4);border-top-color:var(--white);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── SUCCESS ── */
+.success-screen{display:none;text-align:center;padding:48px 20px;}
+.success-screen.show{display:block;animation:fadeUp .5s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.suc-icon{font-size:64px;margin-bottom:16px;}
+.suc-title{font-family:'Fraunces',serif;font-size:28px;color:var(--g-deep);margin-bottom:10px;}
+.suc-sub{font-size:15px;color:var(--tmid);line-height:1.65;max-width:400px;margin:0 auto 24px;}
+.suc-box{background:var(--white);border:1.5px solid var(--g-light);border-radius:12px;padding:20px;max-width:420px;margin:0 auto 24px;text-align:left;}
+.suc-row{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px solid var(--g-pale);}
+.suc-row:last-child{border-bottom:none;}
+.suc-lbl{color:var(--tlight);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+.suc-val{font-weight:600;color:var(--tmid);}
+.suc-cta{display:inline-flex;align-items:center;gap:7px;background:var(--g-deep);color:var(--white);font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;padding:12px 22px;border-radius:9px;text-decoration:none;transition:.2s;margin:6px;}
+.suc-cta:hover{background:var(--g-mid);}
+.suc-cta.outline{background:transparent;border:2px solid var(--g-light);color:var(--g-deep);}
+.suc-cta.outline:hover{background:var(--g-pale);}
+
+/* ── PROGRESS BAR ── */
+.progress-bar{height:3px;background:var(--g-pale);position:relative;overflow:hidden;}
+.progress-fill{height:100%;background:var(--g-bright);transition:width .4s ease;width:0;}
+
+/* ── STEPS (inline) ── */
+.steps-row{display:flex;align-items:center;gap:0;margin-bottom:20px;overflow-x:auto;}
+.steps-row::-webkit-scrollbar{display:none;}
+.step-item{display:flex;align-items:center;gap:0;flex-shrink:0;}
+.step-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--g-light);background:var(--white);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--tlight);transition:.3s;font-family:'Space Mono',monospace;}
+.step-dot.done{background:var(--g-bright);border-color:var(--g-bright);color:var(--white);}
+.step-dot.active{background:var(--g-deep);border-color:var(--g-deep);color:var(--white);box-shadow:0 0 0 4px rgba(26,122,62,.15);}
+.step-lbl{font-size:10px;color:var(--tlight);margin-left:6px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;}
+.step-dot.done~.step-lbl,.step-dot.active~.step-lbl{color:var(--g-deep);}
+.step-line{flex:1;height:2px;background:var(--g-pale);margin:0 8px;min-width:16px;}
+
+/* ── FOOTER ── */
+footer{background:var(--g-deep);padding:20px 24px;text-align:center;border-top:2px solid var(--g-mid);}
+footer small{font-size:11px;color:rgba(255,255,255,.3);}
+footer a{color:var(--g-light);text-decoration:none;}
+footer a:hover{text-decoration:underline;}
+
+/* mobile */
+@media(max-width:440px){
+  .hero{padding:32px 16px 28px;}
+  .hero-stats{flex-wrap:wrap;}
+  .page{padding:20px 14px 48px;}
 }
 </style>
 </head>
@@ -242,395 +271,488 @@ footer small { font-size:11px; color:rgba(255,255,255,.25); }
 
 <!-- HEADER -->
 <header>
-  <div class="logo"><span class="logo-leaf">🌿</span>Sudoeste <em>Meu Amor</em></div>
-  <nav>
-    <button class="nav-btn active" data-show onclick="scroll2('home')">Início</button>
-    <button class="nav-btn" onclick="scroll2('moradores')">Moradores</button>
-    <button class="nav-btn" onclick="scroll2('empresas')">Empresas</button>
-    <a href="agendar.html" class="nav-btn nav-agendar">📣 Agendar Promoção</a>
-    <button class="nav-btn nav-cta" onclick="openAdd()">+ Cadastrar Empresa</button>
-  </nav>
+  <a href="#" class="logo">🌿 Sudoeste <em>Meu Amor</em></a>
+  <a href="https://instagram.com/sudoestemeuamor" target="_blank" class="insta-link">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    @sudoestemeuamor
+  </a>
 </header>
 
+<!-- PROGRESS -->
+<div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+
 <!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-pill">🌿 Sudoeste, Brasília — DF</div>
-  <h1>O bairro que a gente<br><em>ama de verdade</em></h1>
-  <p>Descubra empresas locais, acesse descontos exclusivos e conecte-se com a comunidade do Sudoeste.</p>
-  <div class="search-wrap">
-    <input type="text" id="searchInp" placeholder="Buscar restaurantes, salões, serviços…" oninput="doFilter()">
-    <button onclick="doFilter()">Buscar</button>
-  </div>
+<section class="hero">
+  <div class="hero-badge">📣 Para Comerciantes do Sudoeste</div>
+  <h1>Anuncie sua promoção<br>para o bairro que você <em>ama</em></h1>
+  <p>Escolha seu plano, envie a arte e o comprovante — a gente posta no grupo do WhatsApp no horário certo.</p>
   <div class="hero-stats">
-    <div class="h-stat"><strong id="stN">12</strong><span>Empresas</span></div>
-    <div class="h-stat"><strong id="stD">22%</strong><span>Desconto Médio</span></div>
-    <div class="h-stat"><strong id="stR">★4.7</strong><span>Avaliação</span></div>
-    <div class="h-stat"><strong id="stM">0</strong><span>Moradores</span></div>
+    <div class="hstat"><strong>3</strong><span>horários/dia</span></div>
+    <div class="hstat"><strong>09h·15h·18h</strong><span>slots fixos</span></div>
+    <div class="hstat"><strong>4</strong><span>máx promos/dia</span></div>
   </div>
 </section>
 
-<!-- TABS -->
-<div class="tab-bar">
-  <button class="tab active" onclick="setTab('todas',this)">Todas</button>
-  <button class="tab" onclick="setTab('Gastronomia',this)">🍽 Gastronomia</button>
-  <button class="tab" onclick="setTab('Beleza',this)">💅 Beleza</button>
-  <button class="tab" onclick="setTab('Saúde',this)">🏥 Saúde</button>
-  <button class="tab" onclick="setTab('Moda',this)">👗 Moda</button>
-  <button class="tab" onclick="setTab('Serviços',this)">🔧 Serviços</button>
-  <button class="tab" onclick="setTab('Mercado',this)">🛒 Mercado</button>
-  <button class="tab" onclick="setTab('Educação',this)">📚 Educação</button>
-</div>
-<div class="filters-bar">
-  <button class="f-btn active" onclick="setSort(null,this)">Relevância</button>
-  <button class="f-btn" onclick="setSort('desc',this)">💰 Maior Desconto</button>
-  <button class="f-btn" onclick="setSort('rating',this)">⭐ Melhor Avaliação</button>
-  <button class="f-btn" onclick="setSort('new',this)">🆕 Mais Recentes</button>
-</div>
-
 <!-- MAIN -->
-<main>
+<div class="page">
 
-  <!-- DESTAQUE -->
-  <div id="home-section">
-    <div class="section-hd">
-      <h2 class="section-title">Em <span>Destaque</span></h2>
-      <span class="see-all" onclick="scroll2('empresas')">Ver todos →</span>
-    </div>
-    <div class="dest-grid" id="destGrid"></div>
+  <!-- STEPS -->
+  <div class="steps-row" id="stepsRow">
+    <div class="step-item"><div class="step-dot active" id="sd1">1</div><div class="step-lbl">Plano</div></div>
+    <div class="step-line"></div>
+    <div class="step-item"><div class="step-dot" id="sd2">2</div><div class="step-lbl">Dados</div></div>
+    <div class="step-line"></div>
+    <div class="step-item"><div class="step-dot" id="sd3">3</div><div class="step-lbl">Data &amp; Hora</div></div>
+    <div class="step-line"></div>
+    <div class="step-item"><div class="step-dot" id="sd4">4</div><div class="step-lbl">Confirmar</div></div>
   </div>
 
-  <!-- BANNER AGENDAMENTO -->
-  <div id="agendar" class="promo-section">
+  <div id="msg" class="msg"></div>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="successScreen">
+    <div class="suc-icon">🎉</div>
+    <div class="suc-title">Agendamento recebido!</div>
+    <p class="suc-sub">Vamos revisar seu comprovante e você receberá uma confirmação. Sua promoção será postada no horário escolhido!</p>
+    <div class="suc-box" id="sucBox"></div>
     <div>
-      <div class="promo-tag">📣 Para Comerciantes</div>
-      <h2 class="promo-title">Anuncie sua promoção no<br><em>grupo do Sudoeste</em></h2>
-      <p class="promo-sub">Agende sua promoção no grupo WhatsApp Sudoeste Meu Amor. Escolha o plano, envie sua arte e comprovante — a gente posta no horário certo.</p>
-      <div class="promo-plans">
-        <div class="plan-chip">
-          <div class="plan-chip-name">Diário</div>
-          <div class="plan-chip-price">R$29</div>
-          <div class="plan-chip-freq">1 postagem</div>
-        </div>
-        <div class="plan-chip">
-          <div class="plan-chip-name">Semanal</div>
-          <div class="plan-chip-price">R$79</div>
-          <div class="plan-chip-freq">3 semanas</div>
-        </div>
-        <div class="plan-chip">
-          <div class="plan-chip-name">Mensal</div>
-          <div class="plan-chip-price">R$199</div>
-          <div class="plan-chip-freq">4 semanas</div>
-        </div>
-      </div>
-      <a href="agendar.html" class="promo-cta">📅 Agendar minha promoção →</a>
-    </div>
-    <div class="promo-right">
-      <div class="promo-badge">
-        <div class="promo-badge-num">4</div>
-        <div class="promo-badge-lbl">horários por dia</div>
-      </div>
-      <div class="promo-badge">
-        <div class="promo-badge-num">09h · 15h · 18h</div>
-        <div class="promo-badge-lbl">slots disponíveis</div>
-      </div>
+      <a href="https://instagram.com/sudoestemeuamor" target="_blank" class="suc-cta">Ver Instagram do grupo</a>
+      <a href="/" class="suc-cta outline">Novo agendamento</a>
     </div>
   </div>
 
-  <!-- MORADOR -->
-  <div id="moradores" class="resident-section">
-    <div class="rs-tag">🏠 Sou Morador do Sudoeste</div>
-    <h2 class="rs-title">Acesse descontos<br><em>exclusivos</em> do bairro</h2>
-    <p class="rs-sub">Cadastre-se gratuitamente e receba por e-mail a sua carteirinha virtual com todos os descontos das empresas parceiras do Sudoeste.</p>
-    <div class="rs-perks">
-      <div class="perk"><span class="perk-icon">🎟️</span><span class="perk-text">Carteirinha digital</span></div>
-      <div class="perk"><span class="perk-icon">📧</span><span class="perk-text">E-mail de boas-vindas</span></div>
-      <div class="perk"><span class="perk-icon">🔔</span><span class="perk-text">Novos descontos por e-mail</span></div>
-      <div class="perk"><span class="perk-icon">🌿</span><span class="perk-text">Acesso gratuito</span></div>
+  <form id="form">
+
+    <!-- 1: PLANO -->
+    <div class="card" id="c1">
+      <div class="card-title">📦 Escolha seu plano</div>
+      <div class="plans-grid">
+        <label class="plan-card" id="pc-diario" onclick="selPlano('diario',this)">
+          <input type="radio" name="plano" value="diario">
+          <div class="p-emoji">☀️</div>
+          <div class="p-name">Diário</div>
+          <div class="p-price">R$ 29,90</div>
+          <div class="p-freq">1 postagem</div>
+          <ul class="p-items">
+            <li>Você escolhe o dia</li>
+            <li>Você escolhe o horário</li>
+            <li>Até 4 promos/dia no grupo</li>
+          </ul>
+        </label>
+        <label class="plan-card" id="pc-semanal" onclick="selPlano('semanal',this)" style="padding-top:26px">
+          <div class="plan-pop">Mais popular</div>
+          <input type="radio" name="plano" value="semanal">
+          <div class="p-emoji">📅</div>
+          <div class="p-name">Semanal</div>
+          <div class="p-price">R$ 79,90</div>
+          <div class="p-freq">3 postagens · 3 semanas</div>
+          <ul class="p-items">
+            <li>Mesmo dia toda semana</li>
+            <li>Mesmo horário</li>
+            <li>Mais exposição</li>
+          </ul>
+        </label>
+        <label class="plan-card" id="pc-mensal" onclick="selPlano('mensal',this)">
+          <input type="radio" name="plano" value="mensal">
+          <div class="p-emoji">📆</div>
+          <div class="p-name">Mensal</div>
+          <div class="p-price">R$ 199,90</div>
+          <div class="p-freq">4 postagens · 4 semanas</div>
+          <ul class="p-items">
+            <li>Presença mensal garantida</li>
+            <li>Mesmo dia e horário</li>
+            <li>Máxima visibilidade</li>
+          </ul>
+        </label>
+      </div>
     </div>
-    <div class="rs-form" id="residentForm">
-      <input class="rs-input" type="text" id="rNome" placeholder="Seu nome completo *">
-      <input class="rs-input" type="email" id="rEmail" placeholder="Seu melhor e-mail *">
-      <input class="rs-input" type="tel" id="rPhone" placeholder="WhatsApp (opcional)">
-      <select class="rs-select rs-input" id="rBloco">
-        <option value="">Quadra / Bloco…</option>
-        <option>SQSW 100</option><option>SQSW 200</option><option>SQSW 300</option>
-        <option>SQSW 301</option><option>SQSW 302</option><option>SQSW 303</option>
-        <option>SQSW 304</option><option>SQSW 305</option><option>SQSW 306</option>
-        <option>SQSW 307</option><option>SQSW 308</option><option>SQSW 309</option>
-        <option>SQSW 310</option><option>SQSW 311</option><option>SQSW 312</option>
-        <option>EQSW (Entrequadras)</option><option>Outro</option>
-      </select>
-      <button class="rs-btn rs-full" onclick="registerResident()">🌿 Quero minha Carteirinha de Descontos</button>
-      <div class="success-card" id="successCard">
-        <div class="success-icon">✅</div>
-        <h3>Bem-vindo ao Sudoeste Meu Amor!</h3>
-        <p>Seu cadastro foi realizado. Confira o e-mail de boas-vindas abaixo:</p>
-        <div class="email-preview">
-          <div class="ep-label">📧 E-mail automático enviado para: <span id="epEmail"></span></div>
-          <div class="ep-subject">🌿 Sua Carteirinha Sudoeste Meu Amor chegou!</div>
-          <div class="ep-body" id="epBody"></div>
+
+    <!-- 2: DADOS -->
+    <div class="card" id="c2">
+      <div class="card-title">📝 Dados do negócio</div>
+      <div class="frow">
+        <div class="fgroup">
+          <label class="flbl">Instagram <span class="req">*</span></label>
+          <input class="finp" type="text" id="instagram" placeholder="@seu_negocio" autocomplete="off">
+        </div>
+        <div class="fgroup">
+          <label class="flbl">Nome do negócio <span class="req">*</span></label>
+          <input class="finp" type="text" id="nomeNegocio" placeholder="Ex: Padaria do João" oninput="atualizarResumo()">
+        </div>
+        <div class="fgroup">
+          <label class="flbl">Seu WhatsApp <span class="req">*</span></label>
+          <input class="finp" type="tel" id="telefone" placeholder="(61) 9 9999-9999" autocomplete="tel">
+        </div>
+        <div class="fgroup">
+          <label class="flbl">Seu e-mail <span class="req">*</span></label>
+          <input class="finp" type="email" id="email" placeholder="contato@negocio.com" autocomplete="email">
+        </div>
+      </div>
+      <div class="fgroup">
+        <label class="flbl">Descrição da promoção <span class="req">*</span></label>
+        <textarea class="ftex" id="promocao" placeholder="Ex: Marmita fit por R$ 18 com arroz integral, frango grelhado e salada. De terça a sexta. Mostre o story do Sudoeste Meu Amor!" maxlength="300" oninput="this.nextElementSibling.textContent=this.value.length+'/300'"></textarea>
+        <div class="char-count">0/300</div>
+      </div>
+
+      <!-- UPLOADS -->
+      <div class="fgroup">
+        <label class="flbl">Arquivos <span class="req">*</span></label>
+        <div class="upload-wrap">
+          <label class="upload-zone" id="zA" for="fArte">
+            <input type="file" id="fArte" accept="image/*">
+            <div class="upload-ico">🎨</div>
+            <div class="upload-t">Arte da promoção</div>
+            <div class="upload-s">Será postada no grupo<br>PNG/JPG · máx 5MB</div>
+            <div class="upload-prev" id="pA"><img id="pAimg" alt=""></div>
+            <div class="upload-fn" id="nA"></div>
+          </label>
+          <label class="upload-zone" id="zC" for="fComp">
+            <input type="file" id="fComp" accept="image/*">
+            <div class="upload-ico">🧾</div>
+            <div class="upload-t">Comprovante de pagamento</div>
+            <div class="upload-s">Para validação interna<br>PNG/JPG · máx 5MB</div>
+            <div class="upload-prev" id="pC"><img id="pCimg" alt=""></div>
+            <div class="upload-fn" id="nC"></div>
+          </label>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- EMPRESAS -->
-  <div id="empresas">
-    <div class="section-hd">
-      <h2 class="section-title">Todas as <span>Empresas</span></h2>
-      <span id="coCount" style="font-size:13px;color:var(--text-light)"></span>
+    <!-- 3: DATA E HORA -->
+    <div class="card" id="c3">
+      <div class="card-title">📅 Data e horário</div>
+      <div class="cal-info" id="calInfo">💡 Selecione um plano acima para ver o calendário.</div>
+      <div id="calWrap" style="display:none">
+        <div class="cal-nav">
+          <button type="button" class="cal-btn" id="btnAnt">← Anterior</button>
+          <div class="cal-month" id="calMes"></div>
+          <button type="button" class="cal-btn" id="btnProx">Próximo →</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+      <div id="horWrap" style="display:none;margin-top:20px">
+        <div class="flbl" style="margin-bottom:10px">Horário disponível <span class="req">*</span></div>
+        <div class="hor-grid" id="horGrid"></div>
+      </div>
     </div>
-    <div class="companies-grid" id="companiesGrid"></div>
-  </div>
 
-</main>
+    <!-- 4: RESUMO -->
+    <div class="card" id="c4">
+      <div class="card-title">✅ Resumo do agendamento</div>
+      <div class="resumo">
+        <div class="res-title">📣 Sua promoção no grupo Sudoeste Meu Amor</div>
+        <div class="res-row"><span class="res-lbl">Plano</span><span class="res-val" id="rPlano">—</span></div>
+        <div class="res-row"><span class="res-lbl">Negócio</span><span class="res-val" id="rNegocio">—</span></div>
+        <div class="res-row"><span class="res-lbl">WhatsApp</span><span class="res-val" id="rTel">—</span></div>
+        <div class="res-row"><span class="res-lbl">E-mail</span><span class="res-val" id="rEmail">—</span></div>
+        <div class="res-row"><span class="res-lbl">Data de início</span><span class="res-val" id="rData">—</span></div>
+        <div class="res-row"><span class="res-lbl">Horário</span><span class="res-val" id="rHorario">—</span></div>
+        <div class="res-row"><span class="res-lbl">Postagens</span><span class="res-val" id="rPost">—</span></div>
+        <div class="res-row"><span class="res-lbl">Total</span><span class="res-val res-total" id="rTotal">—</span></div>
+      </div>
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span id="btnTxt">Confirmar agendamento</span>
+      </button>
+      <p class="submit-note">Após envio, revisamos o comprovante e confirmamos por WhatsApp.</p>
+    </div>
+
+  </form>
+</div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">🌿 Sudoeste <em>Meu Amor</em></div>
-  <p>Conectando moradores e empresas do bairro mais verde e amado de Brasília.</p>
-  <div class="footer-social"><a href="https://instagram.com/sudoestemeuamor" target="_blank">@sudoestemeuamor no Instagram</a></div>
-  <div class="footer-links">
-    <a href="agendar.html">📣 Agendar Promoção</a>
-    <a href="#empresas" onclick="openAdd()">+ Cadastrar Empresa</a>
-  </div>
-  <small>© 2025 Sudoeste Meu Amor · Sudoeste — Brasília, DF</small>
+  <small>
+    🌿 Sudoeste Meu Amor · Brasília, DF ·
+    <a href="https://instagram.com/sudoestemeuamor" target="_blank">@sudoestemeuamor</a>
+    · © 2025
+  </small>
 </footer>
 
-<!-- COMPANY MODAL -->
-<div class="overlay" id="coModal" onclick="closeOv(event,'coModal')">
-  <div class="modal">
-    <div class="modal-cover" id="mCover">
-      <button class="modal-x" onclick="closeById('coModal')">✕</button>
-      <div class="modal-logo-big" id="mLogo"></div>
-    </div>
-    <div class="modal-bd">
-      <div class="modal-cat" id="mCat"></div>
-      <div class="modal-name" id="mName"></div>
-      <div class="modal-desc" id="mDesc"></div>
-      <div class="disc-big">
-        <div class="disc-pct" id="mPct"></div>
-        <div class="disc-label">de desconto para moradores cadastrados</div>
-      </div>
-      <div class="info-grid">
-        <div class="info-box"><div class="info-lbl">📍 Endereço</div><div class="info-val" id="mAddr"></div></div>
-        <div class="info-box"><div class="info-lbl">⭐ Avaliação</div><div class="info-val" id="mRating"></div></div>
-        <div class="info-box"><div class="info-lbl">📞 Contato</div><div class="info-val" id="mPhone"></div></div>
-        <div class="info-box"><div class="info-lbl">🕐 Horário</div><div class="info-val" id="mHours"></div></div>
-      </div>
-      <button class="map-btn-modal" id="mMapBtn">📍 Abrir no Google Maps</button>
-      <div class="rate-section">
-        <h3>Avalie esta empresa</h3>
-        <div class="stars-row" id="starsRow">
-          <button class="s-btn" onclick="setR(1)">★</button>
-          <button class="s-btn" onclick="setR(2)">★</button>
-          <button class="s-btn" onclick="setR(3)">★</button>
-          <button class="s-btn" onclick="setR(4)">★</button>
-          <button class="s-btn" onclick="setR(5)">★</button>
-        </div>
-        <textarea class="rev-inp" id="revTxt" rows="3" placeholder="Como foi sua experiência?"></textarea>
-        <button class="rev-submit" onclick="postReview()">Publicar Avaliação</button>
-      </div>
-      <div class="reviews-list" id="revList"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ADD COMPANY MODAL -->
-<div class="overlay add-modal" id="addModal" onclick="closeOv(event,'addModal')">
-  <div class="modal">
-    <div class="modal-cover" style="background:linear-gradient(135deg,var(--green-deep),var(--green-mid));">
-      <button class="modal-x" onclick="closeById('addModal')">✕</button>
-      <div style="font-family:'Fraunces',serif;font-size:24px;color:white;text-align:center;z-index:1;padding:0 20px">Cadastre sua<br><em style="color:var(--green-light)">Empresa</em></div>
-    </div>
-    <div class="modal-bd" style="padding-top:22px">
-      <div class="form-grid2">
-        <div><label class="f-lbl">Nome da Empresa *</label><input class="f-inp" id="fNome" placeholder="Ex: Café do Sudoeste"></div>
-        <div><label class="f-lbl">Categoria *</label><select class="f-sel" id="fCat"><option value="">Selecione…</option><option>Gastronomia</option><option>Beleza</option><option>Saúde</option><option>Moda</option><option>Serviços</option><option>Mercado</option><option>Educação</option></select></div>
-        <div class="f-full"><label class="f-lbl">Descrição *</label><textarea class="f-tex" id="fDesc" placeholder="Descreva sua empresa, produtos e diferenciais…"></textarea></div>
-        <div class="f-full"><label class="f-lbl">Endereço completo *</label><input class="f-inp" id="fAddr" placeholder="Ex: SQSW 304, Bloco A, Loja 10 — Sudoeste"></div>
-        <div><label class="f-lbl">Telefone / WhatsApp</label><input class="f-inp" id="fPhone" placeholder="(61) 99999-9999"></div>
-        <div><label class="f-lbl">E-mail da Empresa</label><input class="f-inp" id="fEmail" type="email" placeholder="contato@empresa.com"></div>
-        <div><label class="f-lbl">Horário</label><input class="f-inp" id="fHours" placeholder="Seg–Sex: 9h–18h"></div>
-        <div><label class="f-lbl">Desconto (%) *</label><input class="f-inp" id="fDisc" type="number" placeholder="Ex: 15" min="1" max="80"></div>
-        <div class="f-full"><label class="f-lbl">Ícone</label><div class="emoji-row" id="emojiRow"></div></div>
-      </div>
-      <button class="f-submit" onclick="addCompany()">🌿 Cadastrar Empresa</button>
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
 <script>
-const BG = {
-  Gastronomia:'linear-gradient(135deg,#1A4A2E,#2D7A4F)',
-  Beleza:'linear-gradient(135deg,#2A4A2A,#4A8A4A)',
-  Saúde:'linear-gradient(135deg,#0F3A26,#1A6A42)',
-  Moda:'linear-gradient(135deg,#1A3A2A,#2A6A4A)',
-  Serviços:'linear-gradient(135deg,#243A2A,#3A6A4A)',
-  Mercado:'linear-gradient(135deg,#2A4A1A,#4A7A2A)',
-  Educação:'linear-gradient(135deg,#1A2A4A,#2A4A7A)',
+// ═══════════════ CONFIG ═══════════════
+// Cole aqui a URL gerada pelo Google Apps Script após o deploy
+const SCRIPT_URL = 'COLE_A_URL_DO_APPS_SCRIPT_AQUI';
+
+const PRECO  = { diario:29.90, semanal:79.90, mensal:199.90 };
+const POSTS  = { diario:1, semanal:3, mensal:4 };
+const HORAS  = ['09:00','15:00','18:00'];
+const HLABEL = { '09:00':'Manhã','15:00':'Tarde','18:00':'Noite' };
+const PNOME  = { diario:'☀️ Diário', semanal:'📅 Semanal', mensal:'📆 Mensal' };
+
+let st = { plano:null, data:null, horario:null, mes:new Date() };
+
+// ═══════════════ PLANO ═══════════════
+function selPlano(p, el) {
+  st.plano = p;
+  st.data = null; st.horario = null;
+  document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('calInfo').style.display = 'none';
+  document.getElementById('calWrap').style.display = 'block';
+  document.getElementById('horWrap').style.display = 'none';
+  gerarCal(st.mes);
+  updSteps(); updResumo(); updProgress();
+}
+
+// ═══════════════ UPLOAD ═══════════════
+function setupUpload(inputId, zoneId, prevId, imgId, nameId) {
+  const inp = document.getElementById(inputId);
+  const zone = document.getElementById(zoneId);
+
+  inp.addEventListener('change', e => {
+    if (e.target.files[0]) doFile(e.target.files[0], prevId, imgId, nameId, zone);
+  });
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault(); zone.classList.remove('drag');
+    if (e.dataTransfer.files[0]) {
+      inp.files = e.dataTransfer.files;
+      doFile(e.dataTransfer.files[0], prevId, imgId, nameId, zone);
+    }
+  });
+}
+
+function doFile(file, prevId, imgId, nameId, zone) {
+  if (file.size > 5*1024*1024) { showMsg('Arquivo maior que 5MB. Escolha um menor.','err'); return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById(imgId).src = e.target.result;
+    document.getElementById(prevId).style.display = 'block';
+    document.getElementById(nameId).textContent = '✓ ' + file.name;
+    document.getElementById(nameId).style.display = 'block';
+    zone.classList.add('done'); zone.classList.remove('drag');
+    updSteps(); updProgress();
+  };
+  reader.readAsDataURL(file);
+}
+
+setupUpload('fArte','zA','pA','pAimg','nA');
+setupUpload('fComp','zC','pC','pCimg','nC');
+
+// ═══════════════ CALENDÁRIO ═══════════════
+const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const DSEM  = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+function gerarCal(d) {
+  const cal = document.getElementById('calGrid');
+  document.getElementById('calMes').textContent = `${MESES[d.getMonth()]} ${d.getFullYear()}`;
+  cal.innerHTML = '';
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+
+  DSEM.forEach(ds => {
+    const h = document.createElement('div');
+    h.className = 'cal-hdr'; h.textContent = ds; cal.appendChild(h);
+  });
+
+  const prim = new Date(d.getFullYear(), d.getMonth(), 1);
+  const ult  = new Date(d.getFullYear(), d.getMonth()+1, 0);
+
+  for (let i=0; i<prim.getDay(); i++) {
+    const el = document.createElement('div'); el.className='cal-day om'; cal.appendChild(el);
+  }
+  for (let dd=1; dd<=ult.getDate(); dd++) {
+    const dt  = new Date(d.getFullYear(), d.getMonth(), dd);
+    const el  = document.createElement('div');
+    const past= dt < hoje;
+    // simula disponibilidade (slots reais virão do backend)
+    const slotsLivres = past ? 0 : Math.floor(Math.random()*3)+1;
+    const isFull = !past && slotsLivres === 0;
+    const isSel  = st.data && dt.toDateString()===st.data.toDateString();
+
+    el.className = 'cal-day' +
+      (past || isFull ? ' dis' : '') +
+      (isFull ? ' full' : '') +
+      (isSel ? ' sel' : '');
+
+    el.innerHTML = `<span>${dd}</span>${!past&&!isFull?`<span class="slots">${slotsLivres} livre${slotsLivres>1?'s':''}</span>`:''}`;
+
+    if (!past && !isFull) {
+      el.addEventListener('click', () => {
+        st.data = dt;
+        st.horario = null;
+        gerarCal(st.mes); // re-render para marcar selecionado
+        gerarHorarios();
+        document.getElementById('horWrap').style.display = 'block';
+        updSteps(); updResumo(); updProgress();
+      });
+    }
+    cal.appendChild(el);
+  }
+
+  const total = prim.getDay() + ult.getDate();
+  const rest = (7 - (total % 7)) % 7;
+  for (let i=0; i<rest; i++) {
+    const el = document.createElement('div'); el.className='cal-day om'; cal.appendChild(el);
+  }
+}
+
+document.getElementById('btnAnt').onclick = () => {
+  st.mes = new Date(st.mes.getFullYear(), st.mes.getMonth()-1, 1);
+  gerarCal(st.mes);
+};
+document.getElementById('btnProx').onclick = () => {
+  st.mes = new Date(st.mes.getFullYear(), st.mes.getMonth()+1, 1);
+  gerarCal(st.mes);
 };
 
-let companies = [
-  {id:1,name:'Cantina da Vó Maria',cat:'Gastronomia',emoji:'🍝',desc:'Culinária italiana artesanal, massas frescas e molhos de família há 20 anos.',addr:'SQSW 304, Bloco B, Loja 5 — Sudoeste',phone:'(61) 3345-1234',email:'cantina@gmail.com',hours:'Ter–Dom: 11h30–22h',discount:25,rating:4.8,reviews:[{name:'Ana Lima',stars:5,text:'Melhor lasanha de Brasília!'},{name:'Carlos M.',stars:5,text:'Ambiente incrível!'}],featured:true},
-  {id:2,name:'Studio Belle',cat:'Beleza',emoji:'💅',desc:'Salão completo de beleza, coloração e tratamentos capilares premium.',addr:'SQSW 302, Bloco C, Loja 3 — Sudoeste',phone:'(61) 99234-5678',email:'studio@gmail.com',hours:'Seg–Sáb: 9h–19h',discount:15,rating:4.7,reviews:[{name:'Fernanda R.',stars:5,text:'Resultado perfeito!'}],featured:true},
-  {id:3,name:'Farmácia Vida & Saúde',cat:'Saúde',emoji:'💊',desc:'Farmácia de manipulação com farmacêutico de plantão e dermocosméticos.',addr:'SQSW 306, Bloco A, Loja 1 — Sudoeste',phone:'(61) 3344-9900',email:'farmacia@gmail.com',hours:'Seg–Sáb: 7h–22h',discount:10,rating:4.6,reviews:[{name:'Paulo S.',stars:4,text:'Ótimo atendimento!'}],featured:true},
-  {id:4,name:'Padaria Sudoeste',cat:'Gastronomia',emoji:'🥐',desc:'Pães artesanais, croissants e café da manhã completo todo dia.',addr:'SQSW 308, Bloco D, Loja 8 — Sudoeste',phone:'(61) 3346-0011',email:'padaria@gmail.com',hours:'Seg–Dom: 6h–20h',discount:20,rating:4.9,reviews:[{name:'Maria J.',stars:5,text:'Melhor pão de queijo!'}],featured:false},
-  {id:5,name:'Academia FitSudoeste',cat:'Saúde',emoji:'🏋️',desc:'Academia completa com musculação, aulas coletivas e personal trainer.',addr:'SQSW 310, Bloco F, Loja 12 — Sudoeste',phone:'(61) 99876-5432',email:'academia@gmail.com',hours:'Seg–Sex: 6h–22h',discount:30,rating:4.5,reviews:[{name:'Lucas P.',stars:5,text:'Equipamentos novos!'}],featured:false},
-  {id:6,name:'Boutique SudOeste Style',cat:'Moda',emoji:'👗',desc:'Moda feminina contemporânea com curadoria especial e peças exclusivas.',addr:'SQSW 303, Bloco E, Loja 6 — Sudoeste',phone:'(61) 99345-6789',email:'boutique@gmail.com',hours:'Seg–Sáb: 10h–20h',discount:20,rating:4.4,reviews:[{name:'Amanda C.',stars:4,text:'Roupas lindas!'}],featured:false},
-  {id:7,name:'Café Bistrô Sudoeste',cat:'Gastronomia',emoji:'☕',desc:'Café artesanal, brunchs de fim de semana e espaço coworking.',addr:'SQSW 305, Bloco A, Loja 2 — Sudoeste',phone:'(61) 99456-7890',email:'cafe@gmail.com',hours:'Seg–Dom: 7h–21h',discount:12,rating:4.8,reviews:[{name:'Beatriz L.',stars:5,text:'Flat white perfeito!'}],featured:false},
-  {id:8,name:'Clínica Bem Estar',cat:'Saúde',emoji:'🌿',desc:'Psicologia, nutrição, fisioterapia e acupuntura. Saúde integral.',addr:'SQSW 307, Bloco B, Loja 7 — Sudoeste',phone:'(61) 3345-3333',email:'clinica@gmail.com',hours:'Seg–Sex: 8h–18h',discount:15,rating:4.7,reviews:[{name:'Sofia M.',stars:5,text:'Profissionais excelentes!'}],featured:false},
-  {id:9,name:'Mercadinho do Bairro',cat:'Mercado',emoji:'🛒',desc:'Hortifrúti fresco, frios e entrega em domicílio no Sudoeste.',addr:'SQSW 309, Bloco C, Loja 4 — Sudoeste',phone:'(61) 3344-2222',email:'mercado@gmail.com',hours:'Seg–Dom: 7h–22h',discount:8,rating:4.3,reviews:[{name:'Diego F.',stars:4,text:'Sempre fresquinho!'}],featured:false},
-  {id:10,name:'TechFix Assistência',cat:'Serviços',emoji:'🔧',desc:'Reparo de celulares, notebooks e tablets. Orçamento grátis.',addr:'SQSW 311, Bloco D, Loja 9 — Sudoeste',phone:'(61) 99567-8901',email:'techfix@gmail.com',hours:'Seg–Sex: 9h–18h',discount:10,rating:4.6,reviews:[{name:'Marcos V.',stars:5,text:'Super rápido!'}],featured:false},
-  {id:11,name:'Escola West Idiomas',cat:'Educação',emoji:'📚',desc:'Inglês, Espanhol, Francês e Mandarim com professores nativos.',addr:'SQSW 302, Sala 201 — Sudoeste',phone:'(61) 3344-8800',email:'west@gmail.com',hours:'Seg–Sex: 7h–21h',discount:35,rating:4.9,reviews:[{name:'Thais O.',stars:5,text:'Aprendi inglês em 18 meses!'}],featured:false},
-  {id:12,name:'Pet Shop Sudoeste',cat:'Serviços',emoji:'🐾',desc:'Banho, tosa, veterinário e pet shop completo. Amor aos pets.',addr:'SQSW 304, Bloco F, Loja 11 — Sudoeste',phone:'(61) 99678-9012',email:'petshop@gmail.com',hours:'Seg–Sáb: 8h–19h',discount:18,rating:4.8,reviews:[{name:'Camila R.',stars:5,text:'Minha cachorra ama!'}],featured:false},
-];
-
-let residents=[], curFilter='todas', curSort=null, curCo=null, curRating=0, selEmoji='🏪';
-
-function renderAll(){ renderDest(); renderGrid(companies); updateStats(); buildEmojiPicker(); }
-
-function renderDest(){
-  const feat=companies.filter(c=>c.featured).slice(0,3);
-  document.getElementById('destGrid').innerHTML=feat.map((c,i)=>`
-    <div class="co-card" onclick="openCo(${c.id})">
-      <div class="co-cover" style="background:${BG[c.cat]||BG.Gastronomia};height:${i===0?'160px':'120px'}">${c.emoji}<div class="co-logo">${c.emoji}</div></div>
-      <div class="co-body">
-        <div class="co-cat">${c.cat}</div>
-        <div class="co-name">${c.name}</div>
-        <div class="co-desc-small">${c.desc.slice(0,70)}…</div>
-        <div class="co-bottom">
-          <div><span class="co-stars">${'★'.repeat(Math.floor(c.rating))}</span><span class="co-rating">${c.rating}</span></div>
-          <div class="disc-badge">-${c.discount}%</div>
-        </div>
-      </div>
-    </div>`).join('');
+// ═══════════════ HORÁRIOS ═══════════════
+function gerarHorarios() {
+  const g = document.getElementById('horGrid');
+  g.innerHTML = '';
+  HORAS.forEach(h => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'hor-btn' + (st.horario===h?' sel':'');
+    btn.innerHTML = `<div class="hor-time">${h}</div><div class="hor-lbl">${HLABEL[h]}</div>`;
+    btn.onclick = () => { st.horario=h; gerarHorarios(); updSteps(); updResumo(); updProgress(); };
+    g.appendChild(btn);
+  });
 }
 
-function renderGrid(list){
-  const g=document.getElementById('companiesGrid');
-  document.getElementById('coCount').textContent=list.length+' empresa'+(list.length!==1?'s':'');
-  if(!list.length){g.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--text-light)">Nenhuma empresa encontrada.</div>';return;}
-  g.innerHTML=list.map(c=>`
-    <div class="co-card" onclick="openCo(${c.id})">
-      <div class="co-cover" style="background:${BG[c.cat]||BG.Gastronomia}">${c.emoji}<div class="co-logo">${c.emoji}</div></div>
-      <div class="co-body">
-        <div class="co-cat">${c.cat}</div>
-        <div class="co-name">${c.name}</div>
-        <div class="co-addr">📍 ${c.addr.split('—')[0].trim()}</div>
-        <div class="co-bottom">
-          <div><span class="co-stars">${'★'.repeat(Math.floor(c.rating))}</span><span class="co-rating">${c.rating||'—'} (${c.reviews.length})</span></div>
-          <div style="display:flex;gap:6px;align-items:center">
-            <div class="disc-badge">-${c.discount}%</div>
-            <button class="map-mini-btn" onclick="event.stopPropagation();goMaps('${encodeURIComponent(c.addr+', Brasília, DF')}')">📍 Mapa</button>
-          </div>
-        </div>
-      </div>
-    </div>`).join('');
+// ═══════════════ STEPS + PROGRESS ═══════════════
+function updSteps() {
+  const arteOk = document.getElementById('zA').classList.contains('done');
+  const compOk = document.getElementById('zC').classList.contains('done');
+  const negOk  = !!document.getElementById('nomeNegocio').value.trim();
+  const done = [false, !!st.plano, negOk&&arteOk&&compOk, !!st.data&&!!st.horario, false];
+  for (let i=1;i<=4;i++) {
+    const el=document.getElementById('sd'+i);
+    el.classList.remove('active','done');
+    if(done[i]) el.classList.add('done');
+  }
+  let next=-1;
+  for(let i=1;i<=4;i++){if(!done[i]){next=i;break;}}
+  if(next>0) document.getElementById('sd'+next).classList.add('active');
 }
 
-function updateStats(){
-  document.getElementById('stN').textContent=companies.length;
-  document.getElementById('stD').textContent=Math.round(companies.reduce((s,c)=>s+c.discount,0)/companies.length)+'%';
-  document.getElementById('stM').textContent=residents.length;
+function updProgress() {
+  const arteOk = document.getElementById('zA').classList.contains('done');
+  const compOk = document.getElementById('zC').classList.contains('done');
+  const negOk  = !!document.getElementById('nomeNegocio').value.trim();
+  const pts = [!!st.plano, negOk&&arteOk&&compOk, !!st.data&&!!st.horario];
+  const pct = Math.round((pts.filter(Boolean).length/3)*100);
+  document.getElementById('progFill').style.width = pct+'%';
 }
 
-function setTab(cat,btn){ curFilter=cat; document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); applyFilter(); }
-function setSort(type,btn){ curSort=type; document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); applyFilter(); }
-function doFilter(){ applyFilter(); }
-function applyFilter(){
-  let list=curFilter==='todas'?[...companies]:companies.filter(c=>c.cat===curFilter);
-  const q=document.getElementById('searchInp').value.toLowerCase().trim();
-  if(q) list=list.filter(c=>c.name.toLowerCase().includes(q)||c.cat.toLowerCase().includes(q)||c.desc.toLowerCase().includes(q));
-  if(curSort==='desc') list.sort((a,b)=>b.discount-a.discount);
-  if(curSort==='rating') list.sort((a,b)=>b.rating-a.rating);
-  if(curSort==='new') list.reverse();
-  renderGrid(list);
+// ═══════════════ RESUMO ═══════════════
+function updResumo() {
+  document.getElementById('rPlano').textContent    = st.plano ? PNOME[st.plano] : '—';
+  document.getElementById('rNegocio').textContent  = document.getElementById('nomeNegocio').value||'—';
+  document.getElementById('rTel').textContent      = document.getElementById('telefone').value||'—';
+  document.getElementById('rEmail').textContent    = document.getElementById('email').value||'—';
+  document.getElementById('rData').textContent     = st.data ? st.data.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'}) : '—';
+  document.getElementById('rHorario').textContent  = st.horario ? `${st.horario} (${HLABEL[st.horario]})` : '—';
+  document.getElementById('rPost').textContent     = st.plano ? `${POSTS[st.plano]}x postagem${POSTS[st.plano]>1?'s':''}` : '—';
+  document.getElementById('rTotal').textContent    = st.plano ? `R$ ${PRECO[st.plano].toFixed(2).replace('.',',')}` : '—';
 }
 
-function openCo(id){
-  const c=companies.find(x=>x.id===id); if(!c) return;
-  curCo=id; curRating=0;
-  document.getElementById('mCover').style.background=BG[c.cat]||BG.Gastronomia;
-  document.getElementById('mLogo').textContent=c.emoji;
-  document.getElementById('mCat').textContent=c.cat;
-  document.getElementById('mName').textContent=c.name;
-  document.getElementById('mDesc').textContent=c.desc;
-  document.getElementById('mPct').textContent=c.discount+'%';
-  document.getElementById('mAddr').textContent=c.addr;
-  document.getElementById('mPhone').textContent=c.phone;
-  document.getElementById('mHours').textContent=c.hours;
-  document.getElementById('mRating').textContent='★'.repeat(Math.floor(c.rating))+' '+c.rating+' ('+c.reviews.length+')';
-  document.getElementById('mMapBtn').onclick=()=>goMaps(encodeURIComponent(c.addr+', Brasília, DF'));
-  document.querySelectorAll('.s-btn').forEach(b=>b.classList.remove('on'));
-  document.getElementById('revTxt').value='';
-  renderRevs(c);
-  document.getElementById('coModal').classList.add('open');
-}
-function renderRevs(c){
-  document.getElementById('revList').innerHTML=c.reviews.map(r=>`<div class="rev-item"><div class="rev-hd"><span class="rev-name">${r.name}</span><span class="rev-stars">${'★'.repeat(r.stars)}</span></div><div class="rev-txt">${r.text}</div></div>`).join('')||'<p style="font-size:13px;color:var(--text-light)">Seja o primeiro a avaliar!</p>';
-}
-function setR(n){ curRating=n; document.querySelectorAll('.s-btn').forEach((b,i)=>b.classList.toggle('on',i<n)); }
-function postReview(){
-  const c=companies.find(x=>x.id===curCo); if(!c) return;
-  if(!curRating){toast('⭐ Selecione uma avaliação!');return;}
-  const txt=document.getElementById('revTxt').value.trim();
-  if(!txt){toast('✍️ Escreva um comentário!');return;}
-  c.reviews.push({name:'Você',stars:curRating,text:txt});
-  c.rating=Math.round(c.reviews.reduce((s,r)=>s+r.stars,0)/c.reviews.length*10)/10;
-  document.getElementById('mRating').textContent='★'.repeat(Math.floor(c.rating))+' '+c.rating+' ('+c.reviews.length+')';
-  renderRevs(c); document.getElementById('revTxt').value=''; curRating=0;
-  document.querySelectorAll('.s-btn').forEach(b=>b.classList.remove('on'));
-  renderGrid(companies); toast('✅ Avaliação publicada!');
+// atualizar resumo ao digitar
+['nomeNegocio','telefone','email'].forEach(id =>
+  document.getElementById(id).addEventListener('input', () => { updResumo(); updSteps(); updProgress(); })
+);
+
+// ═══════════════ SUBMIT ═══════════════
+document.getElementById('form').addEventListener('submit', async e => {
+  e.preventDefault();
+
+  const instagram  = document.getElementById('instagram').value.trim();
+  const nome       = document.getElementById('nomeNegocio').value.trim();
+  const telefone   = document.getElementById('telefone').value.trim();
+  const emailVal   = document.getElementById('email').value.trim();
+  const promocao   = document.getElementById('promocao').value.trim();
+  const fArte      = document.getElementById('fArte').files[0];
+  const fComp      = document.getElementById('fComp').files[0];
+
+  // Validação
+  if (!st.plano)       return showMsg('Selecione um plano.','err');
+  if (!instagram)      return showMsg('Informe o Instagram do negócio.','err');
+  if (!nome)           return showMsg('Informe o nome do negócio.','err');
+  if (!telefone)       return showMsg('Informe seu WhatsApp para contato.','err');
+  if (!emailVal||!emailVal.includes('@')) return showMsg('Informe um e-mail válido.','err');
+  if (!promocao)       return showMsg('Descreva a promoção.','err');
+  if (!fArte)          return showMsg('Envie a arte da promoção.','err');
+  if (!fComp)          return showMsg('Envie o comprovante de pagamento.','err');
+  if (!st.data)        return showMsg('Escolha a data no calendário.','err');
+  if (!st.horario)     return showMsg('Escolha o horário.','err');
+
+  const btn = document.getElementById('submitBtn');
+  const txtEl = document.getElementById('btnTxt');
+  btn.disabled = true;
+  txtEl.innerHTML = '<span class="loader"></span> Enviando agendamento…';
+  showMsg('⏳ Processando…','load');
+
+  try {
+    const [b64Arte, b64Comp] = await Promise.all([lerArquivo(fArte), lerArquivo(fComp)]);
+
+    const body = new FormData();
+    body.append('plano',       st.plano);
+    body.append('instagram',   instagram.replace('@',''));
+    body.append('nomeNegocio', nome);
+    body.append('telefone',    telefone);
+    body.append('email',       emailVal);
+    body.append('promocao',    promocao);
+    body.append('arte',        b64Arte);
+    body.append('comprovante', b64Comp);
+    body.append('data',        st.data.toISOString().split('T')[0]);
+    body.append('horario',     st.horario);
+
+    let sucesso = false;
+    try {
+      const res = await fetch(SCRIPT_URL, { method:'POST', body });
+      const txt = await res.text();
+      sucesso = txt.includes('sucesso');
+      if (!sucesso) showMsg('Erro ao enviar: '+txt,'err');
+    } catch {
+      // Se URL não configurada, exibe tela de sucesso em modo demo
+      sucesso = SCRIPT_URL.includes('COLE_A_URL');
+    }
+
+    if (sucesso) mostrarSucesso(nome, instagram, emailVal, telefone);
+    else { btn.disabled=false; txtEl.textContent='Confirmar agendamento'; }
+
+  } catch (err) {
+    showMsg('Erro ao processar arquivos. Tente novamente.','err');
+    btn.disabled=false; txtEl.textContent='Confirmar agendamento';
+  }
+});
+
+function mostrarSucesso(nome, ig, email, tel) {
+  document.getElementById('msg').style.display='none';
+  document.getElementById('form').style.display='none';
+  document.getElementById('stepsRow').style.display='none';
+  document.getElementById('progFill').style.width='100%';
+
+  const PNOMES = { diario:'☀️ Diário — R$ 29,90', semanal:'📅 Semanal — R$ 79,90', mensal:'📆 Mensal — R$ 199,90' };
+  document.getElementById('sucBox').innerHTML = `
+    <div class="suc-row"><span class="suc-lbl">Negócio</span><span class="suc-val">${nome}</span></div>
+    <div class="suc-row"><span class="suc-lbl">Instagram</span><span class="suc-val">@${ig}</span></div>
+    <div class="suc-row"><span class="suc-lbl">WhatsApp</span><span class="suc-val">${tel}</span></div>
+    <div class="suc-row"><span class="suc-lbl">E-mail</span><span class="suc-val">${email}</span></div>
+    <div class="suc-row"><span class="suc-lbl">Plano</span><span class="suc-val">${PNOMES[st.plano]}</span></div>
+    <div class="suc-row"><span class="suc-lbl">Data</span><span class="suc-val">${st.data.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'})}</span></div>
+    <div class="suc-row"><span class="suc-lbl">Horário</span><span class="suc-val">${st.horario} — ${HLABEL[st.horario]}</span></div>
+  `;
+  document.getElementById('successScreen').classList.add('show');
+  document.querySelector('.hero').style.display='none';
 }
 
-function registerResident(){
-  const nome=document.getElementById('rNome').value.trim();
-  const email=document.getElementById('rEmail').value.trim();
-  const bloco=document.getElementById('rBloco').value;
-  if(!nome||!email){toast('⚠️ Nome e e-mail são obrigatórios!');return;}
-  if(!email.includes('@')){toast('⚠️ E-mail inválido!');return;}
-  if(residents.find(r=>r.email===email)){toast('📧 E-mail já cadastrado!');return;}
-  const resident={nome,email,phone:document.getElementById('rPhone').value,bloco,id:'SW-'+String(residents.length+1).padStart(4,'0'),dt:new Date().toLocaleDateString('pt-BR')};
-  residents.push(resident); updateStats();
-  const discList=companies.slice(0,5).map(c=>`• ${c.name}: -${c.discount}%`).join('\n');
-  document.getElementById('epEmail').textContent=email;
-  document.getElementById('epBody').innerHTML=`Olá, <strong>${nome}</strong>! 🌿<br><br>Bem-vindo(a) ao <strong>Sudoeste Meu Amor</strong>!<br>Sua carteirinha de membro foi criada com sucesso.<br><br>🎟️ <strong>ID do membro:</strong> ${resident.id}<br>🏠 <strong>Quadra:</strong> ${bloco||'Sudoeste'}<br><br><strong>Seus descontos exclusivos de hoje:</strong><br>${discList}<br><br>Apresente este e-mail nas empresas parceiras para garantir seu desconto. 💚`;
-  document.getElementById('successCard').classList.add('show');
-  ['rNome','rEmail','rPhone'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('rBloco').value='';
-  toast('🎉 Cadastro realizado! Confira seu e-mail de boas-vindas abaixo.');
+// ═══════════════ HELPERS ═══════════════
+function lerArquivo(file) {
+  return new Promise((res,rej) => {
+    const r = new FileReader();
+    r.onload = e => res(e.target.result);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
 }
 
-function openAdd(){ document.getElementById('addModal').classList.add('open'); }
-function addCompany(){
-  const nome=document.getElementById('fNome').value.trim();
-  const cat=document.getElementById('fCat').value;
-  const desc=document.getElementById('fDesc').value.trim();
-  const addr=document.getElementById('fAddr').value.trim();
-  const disc=parseInt(document.getElementById('fDisc').value)||0;
-  if(!nome||!cat||!desc||!addr||!disc){toast('⚠️ Preencha os campos obrigatórios!');return;}
-  companies.unshift({id:Date.now(),name:nome,cat,emoji:selEmoji,desc,addr,phone:document.getElementById('fPhone').value||'(61) 99999-9999',email:document.getElementById('fEmail').value||'',hours:document.getElementById('fHours').value||'Consulte o estabelecimento',discount:disc,rating:0,reviews:[],featured:false});
-  renderAll(); closeById('addModal');
-  ['fNome','fDesc','fAddr','fPhone','fEmail','fHours','fDisc'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('fCat').value='';
-  toast('🌿 Empresa cadastrada com sucesso!');
+function showMsg(txt, tipo) {
+  const el = document.getElementById('msg');
+  el.textContent = txt; el.className = 'msg '+tipo; el.style.display='block';
+  if (tipo!=='load') setTimeout(()=>el.style.display='none',5000);
+  el.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-
-function buildEmojiPicker(){
-  const emojis='🍕🍔☕🥗🍣🍰🥐🍹💅💆🧴👗👠🏋️💊🧸📚🛒🔧🏠🚗🎨🌺🐾🍝🏪💇🥦🏥🌿'.split('');
-  document.getElementById('emojiRow').innerHTML=emojis.map(e=>`<div class="em-opt ${e===selEmoji?'sel':''}" onclick="selEm('${e}')">${e}</div>`).join('');
-}
-function selEm(e){ selEmoji=e; document.querySelectorAll('.em-opt').forEach(el=>el.classList.toggle('sel',el.textContent===e)); }
-function goMaps(q){ window.open('https://www.google.com/maps/search/?api=1&query='+q,'_blank'); }
-function closeOv(e,id){ if(e.target.id===id) document.getElementById(id).classList.remove('open'); }
-function closeById(id){ document.getElementById(id).classList.remove('open'); }
-function scroll2(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
-function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3200); }
-
-renderAll();
 </script>
 </body>
 </html>
